@@ -26,6 +26,11 @@ export const GET_CUSTOMERS_BY_ID = gql`
       updated_at
       disabled
       unique_password
+       cards{
+        id
+        card_number
+        balance
+      }
     }
   }
 `

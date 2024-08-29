@@ -21,6 +21,24 @@ export const CREATE_CARD = gql`
   }
 `;
 
+export const CARD_REGISTER = gql`
+  mutation cardRegister(
+    $card_number: String!
+    $card_password: String!
+    $customer_id: uuid!
+    $balance: numeric!
+  ) {
+    cardRegister(
+      card_number: $card_number
+      card_password: $card_password
+      customer_id: $customer_id
+      balance: $balance
+    ) {
+      message
+    }
+  }
+`;
+
 
 export const UPDATE_CARD_BY_ID = gql`
   mutation updateCardById(

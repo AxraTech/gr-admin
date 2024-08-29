@@ -11,7 +11,6 @@ import { UPDATE_CARD_BY_ID } from "../../../graphql/mutation/card-mutation";
 
 const CardDetail = () => {
   const { cardId } = useParams();
-  console.log(cardId)
   const navigate = useNavigate();
   const [isEdit, setisEdit] = useState(false);
   const { data: getCardbyId, loading: fetchCardbyId } = useQuery(
@@ -30,6 +29,8 @@ const CardDetail = () => {
     disabled:"",
     updated_at:"",
   });
+
+  console.log(cardData)
 
   useEffect(() => {
     if (fetchCardbyId) {
@@ -67,7 +68,6 @@ const CardDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(cardData)
     try {
       await updateCardById({
         variables: {
@@ -150,11 +150,11 @@ const CardDetail = () => {
                           "border-transparent": !isEdit,
                         }
                       )}
-                      type="text"
+                      type="number"
                       disabled={!isEdit}
                       name="balance"
-                      value={cardData.balance || ""}
-                      placeholder={cardData.balance || ""}
+                      value={cardData.balance === 0 ?"0": cardData.balance}
+                      placeholder={cardData.balance === 0 ?"0": cardData.balance}
                       onChange={handleInputChange}
                     />
                   </div>

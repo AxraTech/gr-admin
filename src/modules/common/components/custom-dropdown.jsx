@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dropdown from "react-dropdown";
 
-const CustomDropdown = ({ options, setOption, initialValue, label, isLabel=true }) => {
+const CustomDropdown = ({ options, setOption, initialValue, label, isLabel=true, isOptionValue=true }) => {
   const [selectedOption, setSelectedOption] = useState();
 
   const transformedData = (options) => {
@@ -15,7 +15,12 @@ const CustomDropdown = ({ options, setOption, initialValue, label, isLabel=true 
 
   const handleSelect = (option) => {
     setSelectedOption(option);
-    setOption(option.value);
+    if(isOptionValue){
+      setOption(option.value);
+    }else{
+      setOption(option.label)
+    }
+    
   };
 
   useEffect(() => {

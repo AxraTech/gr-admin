@@ -24,7 +24,6 @@ const TerminalDetail = () => {
     GET_TERMINAL_BY_ID,
     {
       variables: { id: terminalId },
-      pollInterval:500
     }
   );
 
@@ -47,7 +46,6 @@ const TerminalDetail = () => {
     loading: fetchFacility,
     error: fetchFacilityError,
   } = useQuery(GET_FACILITIES, {
-    pollInterval: 500,
   });
 
   useEffect(() => {

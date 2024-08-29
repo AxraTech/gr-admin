@@ -25,9 +25,7 @@ const CreateFacilityService = () => {
     data: getFacility,
     loading: fetchFacility,
     error: fetchFacilityError,
-  } = useQuery(GET_FACILITIES, {
-    pollInterval: 500,
-  });
+  } = useQuery(GET_FACILITIES);
 
   useEffect(() => {
     if (getFacility && getFacility.facilities) {

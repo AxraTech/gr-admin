@@ -22,7 +22,6 @@ const FacilityServiceDetail = () => {
     GET_FACILITY_SERVICE_BY_ID,
     {
       variables: { id: facilityServiceId },
-      pollInterval:500
     }
   );
 
@@ -45,7 +44,6 @@ const FacilityServiceDetail = () => {
     loading: fetchFacility,
     error: fetchFacilityError,
   } = useQuery(GET_FACILITIES, {
-    pollInterval: 500,
   });
 
   useEffect(() => {

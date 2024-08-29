@@ -18,7 +18,6 @@ const CardDetail = () => {
     GET_CARDS_BY_ID,
     {
       variables: { id: cardId },
-      pollInterval:500,
       onCompleted: () => nProgress.done(),
     }
   );

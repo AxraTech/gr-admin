@@ -25,9 +25,7 @@ const CreateFacility = () => {
     data: getEstablishments,
     loading: fetchEstablishment,
     error: fetchEstablishmentError,
-  } = useQuery(GET_ESTABLISHMENT, {
-    pollInterval: 500,
-  });
+  } = useQuery(GET_ESTABLISHMENT);
 
   useEffect(() => {
     if (getEstablishments && getEstablishments.establishments) {

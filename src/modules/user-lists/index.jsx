@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CustomTable from "../common/components/custom-table";
 import { userColumn } from "../common/components/custom-table/columns";
 import CustomFilter from "../common/components/custom-filter";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery,useLazyQuery } from "@apollo/client";
 import { GET_CUSTOMERS, GET_CUSTOMERS_BY_STATUS } from "../../graphql/query/customer-query";
 import nProgress from "nprogress";
@@ -11,6 +11,7 @@ import { customerFilterOptions } from "../../lib/config";
 const UserList = () => {
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
+  const location = useLocation();
   const [getCustomers,{
     data: customerList,
     loading: fetchCustomerList,

@@ -4,13 +4,11 @@ export const CREATE_CARD = gql`
   mutation createCard(
     $card_number: String
     $card_password: String
-    $balance: numeric
   ) {
     insert_cards_one(
       object: {
         card_number: $card_number
         card_password: $card_password
-        balance: $balance
       }
     ) {
       card_number
@@ -19,6 +17,24 @@ export const CREATE_CARD = gql`
       updated_at
       disabled
       balance
+    }
+  }
+`;
+
+export const CARD_REGISTER = gql`
+  mutation cardRegister(
+    $card_number: String!
+    $card_password: String!
+    $customer_id: uuid!
+    $balance: numeric!
+  ) {
+    cardRegister(
+      card_number: $card_number
+      card_password: $card_password
+      customer_id: $customer_id
+      balance: $balance
+    ) {
+      message
     }
   }
 `;

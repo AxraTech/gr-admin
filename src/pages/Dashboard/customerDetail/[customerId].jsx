@@ -10,11 +10,22 @@ import clsx from "clsx";
 import toast, { Toaster } from "react-hot-toast";
 import LoadingButton from "../../../modules/common/icon/loading-icon";
 import { UPDATE_CUSTOMER_BY_ID } from "../../../graphql/mutation/customer-mutation";
+import { CARD_REGISTER } from "../../../graphql/mutation/card-mutation";
 
 const CustomerDetail = () => {
   const { customerId } = useParams();
   const navigate = useNavigate();
   const [isEdit, setisEdit] = useState(false);
+  const [isRegister, setIsregister] = useState(false);
+  const [
+    cardRegisters,
+    { loading: cardRegisterLoading, error: cardRegisterError },
+  ] = useMutation(CARD_REGISTER);
+  const {
+    register: cardRegister,
+    reset: cardRegisterReset,
+    handleSubmit: cardRegisterSubmit,
+  } = useForm();
   const { data: getCustomerbyId, loading: fetchCustomerbyId } = useQuery(
     GET_CUSTOMERS_BY_ID,
     {
@@ -23,16 +34,23 @@ const CustomerDetail = () => {
   );
 
   const [customerData, setCustomerData] = useState({
-      id:"",
-      name:"",
-      phone:"",
-      email:"",
-      card_id:"",
-      created_at:"",
-      updated_at:"",
-      disabled:"",
-      unique_password:"",
+    id: "",
+    name: "",
+    phone: "",
+    email: "",
+    card_id: "",
+    created_at: "",
+    updated_at: "",
+    disabled: "",
+    unique_password: "",
+    cards: {
+      id: "",
+      card_number: "",
+      balance: "",
+    },
   });
+
+  console.log(customerData);
 
   useEffect(() => {
     if (getCustomerbyId) {
@@ -61,7 +79,7 @@ const CustomerDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(customerData)
+    console.log(customerData);
     try {
       await updateCustomerById({
         variables: {
@@ -69,7 +87,6 @@ const CustomerDetail = () => {
           name: customerData.name,
           phone: customerData.phone,
           email: customerData.email,
-          card_id:customerData.card_id,
           disabled: customerData.disabled,
         },
       });
@@ -80,13 +97,35 @@ const CustomerDetail = () => {
     }
   };
 
+  const handleCardRegister = cardRegisterSubmit(async (credentials) => {
+    if (credentials.password !== credentials.confirm_password) {
+      toast.error("Please Confirm Password");
+    } else if (credentials.card_number.length > 6) {
+      toast.error("Invalid Card");
+    } else {
+      try {
+        await cardRegisters({
+          variables: {
+            card_number: credentials.card_number.toString(),
+            card_password: credentials.card_password,
+            balance: credentials.balance,
+            customer_id: customerId,
+          },
+        });
+      } catch (error) {
+        console.log("error registering card");
+        toast.error("Enable to register");
+      }
+    }
+  });
+
   if (fetchCustomerbyId) return <div></div>;
 
   return (
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
       <Toaster />
-      <div className="w-1/2 max-h-[80vh] h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
-        <div className="w-full h-full overflow-auto rounded grid grid-cols-1">
+      <div className="w-full max-h-[80vh] h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
+        <div className="w-full h-full overflow-auto rounded grid grid-cols-2 gap-3">
           <div className="w-full h-full p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
@@ -171,29 +210,7 @@ const CustomerDetail = () => {
                       disabled={!isEdit}
                       name="email"
                       value={customerData.email || ""}
-                      placeholder={customerData.email|| ""}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="w-full h-auto grid grid-cols-2">
-                    <div>
-                      <p className="text-left mt-2 ml-3 font-semibold">
-                        Card Number:
-                      </p>
-                    </div>
-                    <input
-                      className={clsx(
-                        "w-full border text-black focus:outline-none rounded p-2",
-                        {
-                          "border-purple-800": isEdit,
-                          "border-transparent": !isEdit,
-                        }
-                      )}
-                      type="text"
-                      disabled={!isEdit}
-                      name="card_id"
-                      value={customerData.card_id|| ""}
-                      placeholder={customerData.card_id|| ""}
+                      placeholder={customerData.email || ""}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -226,7 +243,9 @@ const CustomerDetail = () => {
                   ) : (
                     <div className="w-full grid grid-cols-2">
                       <div>
-                        <p className="text-left mt-2 ml-3 font-semibold">Status</p>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Status
+                        </p>
                       </div>
                       <div>
                         <p className="text-left mt-2 ml-[0.6rem]">
@@ -256,7 +275,130 @@ const CustomerDetail = () => {
               </div>
             </div>
           </div>
-          {/* <div></div> */}
+          <div className="w-full h-full p-6 border bg-gray-100 rounded">
+            <div className="w-full h-full flex flex-col gap-4">
+              <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
+                {/* <button
+                  onClick={() => navigate("/dashboard/customer")}
+                  className="bg-transparent"
+                >
+                  <FaArrowLeft size={20} color="white" />
+                </button> */}
+                <button
+                  onClick={() => setIsregister(!isRegister)}
+                  className="min-h-8 border border-white bg-transparent text-white"
+                >
+                  {isRegister ? "Cards" : "Add Card"}
+                </button>
+              </div>
+              <div className="w-full h-full">
+                {isRegister ? (
+                  <form
+                    className="w-full h-full overflow-y-auto flex flex-col gap-4"
+                    action=""
+                    onSubmit={handleCardRegister}
+                  >
+                    <div className="w-full h-12 grid grid-cols-2">
+                      <div>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Card No
+                        </p>
+                      </div>
+                      <div>
+                        <InputField
+                          label=""
+                          isLabel={false}
+                          name="card_number"
+                          placeholder="Enter CardNumber"
+                          inputType="number"
+                          fullSize={true}
+                          require={cardRegister}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full h-12 grid grid-cols-2">
+                      <div>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Password
+                        </p>
+                      </div>
+                      <div>
+                        <InputField
+                          label=""
+                          isLabel={false}
+                          name="card_password"
+                          placeholder="Enter Password"
+                          inputType="password"
+                          fullSize={true}
+                          require={cardRegister}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full h-12 grid grid-cols-2">
+                      <div>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Confirm Password
+                        </p>
+                      </div>
+                      <div>
+                        <InputField
+                          label=""
+                          isLabel={false}
+                          name="confirm_password"
+                          placeholder="Confirm Password"
+                          inputType="password"
+                          fullSize={true}
+                          require={cardRegister}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full h-12 grid grid-cols-2">
+                      <div>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Balance
+                        </p>
+                      </div>
+                      <div>
+                        <InputField
+                          label=""
+                          isLabel={false}
+                          name="balance"
+                          placeholder="Enter Balance"
+                          inputType="number"
+                          fullSize={true}
+                          require={cardRegister}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full h-12 mt-4">
+                      <button
+                        type="submit"
+                        className="w-full h-full flex flex-row items-center justify-center text-white bg-gradient-to-r from-blue-900 to-gray-600"
+                      >
+                        {updateCustomerLoading ? (
+                          <LoadingButton size={20} />
+                        ) : (
+                          "Register"
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <div className="w-full h-full overflow-y-auto flex flex-col gap-4">
+                    {!customerData.cards ? (
+                      <div></div>
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <p className="text-purple-800 font-bold">
+                          No Available Card Yet!
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

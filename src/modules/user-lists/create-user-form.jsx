@@ -19,9 +19,6 @@ const CreateUser = () => {
       if (credentials.password !== credentials.confirm_password) {
         toast.error("Please confirm password");
       }
-      else if(credentials.card_id.length>8){
-        toast.error("Invalid Card")
-      }
       else {
         try {
            await createCustomer({
@@ -29,7 +26,6 @@ const CreateUser = () => {
               name: credentials.name,
               phone: credentials.phone,
               email: credentials.email,
-              card_id: credentials.card_id,
               disabled: false,
               unique_password: uniquePassword,
             },
@@ -75,7 +71,7 @@ const CreateUser = () => {
             className="w-full flex flex-col gap-6"
             action=""
           >
-            <div className="w-full h-full grid grid-cols-3 gap-4">
+            <div className="w-full h-full grid grid-cols-2 gap-4">
               <div className="flex flex-col items-start gap-2 pb-4">
                 <InputField
                   label="Username"
@@ -136,20 +132,6 @@ const CreateUser = () => {
                   fullSize={false}
                   require={customerRegister}
                   //  value={formValues.confirm_password}
-                  // onChange={handleInputChange}
-                />
-              </div>
-              <div className="w-full flex flex-col items-center">
-                <div className="w-[20vw] h-[20vh] border border-gray-700 mt-5 rounded-md"></div>
-                <InputField
-                  label=""
-                  name="card_id"
-                  placeholder="001001"
-                  inputType="number"
-                  fullSize={true}
-                  isLabel={false}
-                  require={customerRegister}
-                  // value={formValues.card_id}
                   // onChange={handleInputChange}
                 />
               </div>

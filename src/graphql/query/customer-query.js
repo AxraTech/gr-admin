@@ -7,7 +7,6 @@ export const GET_CUSTOMERS = gql`
       name
       phone
       email
-      card_id
       created_at
       updated_at
       disabled
@@ -23,11 +22,15 @@ export const GET_CUSTOMERS_BY_ID = gql`
       name
       phone
       email
-      card_id
       created_at
       updated_at
       disabled
       unique_password
+       cards{
+        id
+        card_number
+        balance
+      }
     }
   }
 `
@@ -39,7 +42,6 @@ export const GET_CUSTOMERS_BY_STATUS = gql`
       name
       phone
       email
-      card_id
       created_at
       updated_at
       disabled

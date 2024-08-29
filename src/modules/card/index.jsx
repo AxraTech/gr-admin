@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CustomTable from "../common/components/custom-table";
 import {cardColumn } from "../common/components/custom-table/columns";
 import CustomFilter from "../common/components/custom-filter";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery,useLazyQuery } from "@apollo/client";
 import { GET_CARDS} from "../../graphql/query/card-query";
 import nProgress from "nprogress";
@@ -12,6 +12,7 @@ import { GET_CARDS_BY_STATUS } from "../../graphql/query/card-query";
 const CardList = () => {
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
+  const location = useLocation();
   const [getCards,{
     data: cardList,
     loading: fetchCardList,
@@ -21,7 +22,9 @@ const CardList = () => {
 
   useEffect(() => {
     if (location.state?.refetch) {
-      cardRefetch();
+      cardRefetch().then(() => {
+        navigate('/dashboard/card', { state: {} });
+      });
     }
   }, [location.state, cardRefetch]);
 

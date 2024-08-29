@@ -69,7 +69,6 @@ const CustomerDetail = () => {
           name: customerData.name,
           phone: customerData.phone,
           email: customerData.email,
-          card_id:customerData.card_id,
           disabled: customerData.disabled,
         },
       });
@@ -172,28 +171,6 @@ const CustomerDetail = () => {
                       name="email"
                       value={customerData.email || ""}
                       placeholder={customerData.email|| ""}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="w-full h-auto grid grid-cols-2">
-                    <div>
-                      <p className="text-left mt-2 ml-3 font-semibold">
-                        Card Number:
-                      </p>
-                    </div>
-                    <input
-                      className={clsx(
-                        "w-full border text-black focus:outline-none rounded p-2",
-                        {
-                          "border-purple-800": isEdit,
-                          "border-transparent": !isEdit,
-                        }
-                      )}
-                      type="text"
-                      disabled={!isEdit}
-                      name="card_id"
-                      value={customerData.card_id|| ""}
-                      placeholder={customerData.card_id|| ""}
                       onChange={handleInputChange}
                     />
                   </div>

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../../modules/common/components/sidebar";
 import { FaCircleUser } from "react-icons/fa6";
 import UserList from "../../modules/user-lists";
@@ -24,6 +24,7 @@ import FacilityDetail from "./facilityDetail/[facilityId]";
 import FacilityServiceDetail from "./facilityServiceDetail/[facilityServiceid]";
 import CardTransactionList from "../../modules/card-transaction";
 import CardTransactionDetail from "./cardTransactionDetail/[cardTransactionId]";
+import { SlLogout } from "react-icons/sl";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -44,6 +45,8 @@ const Dashboard = () => {
   const startProgress = () => nProgress.start();
   const stopProgress = () => nProgress.done();
 
+  const navigate = useNavigate();
+
     return(
         <div className="flex h-screen w-screen">
         <Sidebar />
@@ -53,11 +56,15 @@ const Dashboard = () => {
               <div className="h-full flex items-center justify-center text-purple-900">
                 <h2 className="text-3xl font-bold">Dashboard</h2>
               </div>
-              <div className="h-full flex flex-row items-center">
-                <div></div>
-                <div className="w-14 h-14 rounded-full border border-purple-900 flex items-center justify-center">
-                  <FaCircleUser color="purple" size={20} />
-                </div>
+              <div className="h-full w-full flex flex-row items-center justify-end">
+                <button
+                onClick={() => {
+                  localStorage.clear();
+                   navigate('/')
+                }}
+                className="min-w-12 mr-[20vw] bg-transparent hover:cursor-pointer border-none hover:text-gray-700 hover:border-none h-full flex flex-row items-center gap-2">
+                  <SlLogout size={20}/><p>Logout</p>
+                </button>
               </div>
             </div>
           </div>

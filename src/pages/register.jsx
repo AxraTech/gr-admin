@@ -8,13 +8,19 @@ import { CREATE_STAFF } from "../graphql/mutation/staff-role-mutation";
 import toast, { Toaster } from "react-hot-toast";
 import bcrypt from "bcryptjs";
 import LoadingButton from "../modules/common/icon/loading-icon";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [staffRole, setStaffRole] = useState();
   const [staffRoleOptions, setStaffRoleOptions] = useState();
   const { register: signupRegister, handleSubmit:createStaffSubmit,reset } = useForm();
   const {data:getStaffRole,loading:fetchStaffRole} = useQuery(GET_STAFF_ROLE);
-  const [createStaff, {loading:createStaffLoading, error:createStaffError}] = useMutation(CREATE_STAFF)
+  const [createStaff, {loading:createStaffLoading, error:createStaffError}] = useMutation(CREATE_STAFF,{
+    onCompleted:() => {
+      navigate('/')
+    }
+  })
   
   useEffect(() => {
     if (getStaffRole && getStaffRole.staff_roles) {

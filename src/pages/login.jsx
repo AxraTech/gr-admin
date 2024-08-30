@@ -1,16 +1,51 @@
 import { useForm } from "react-hook-form";
 import InputField from "../modules/common/components/input-field";
+import { useMutation } from "@apollo/client";
+import { SIGN_IN_MUTATION } from "../graphql/mutation/sign-in-mutation";
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import LoadingButton from "../modules/common/icon/loading-icon";
 
 const Login = () => {
-  const { register: loginRegister, error: loginFormError } = useForm();
+  const navigate = useNavigate();
+  const { register: loginRegister, handleSubmit:handleLoginSubmit } = useForm();
+  const [staffLogin,{loading:loginLoading,error:loginError}] = useMutation(SIGN_IN_MUTATION,{
+    onCompleted:(data)=> {
+      const token = data.staffLogin.token;
+      if(token){
+        localStorage.setItem("token", token);
+        navigate('/dashboard')
+      }
+      localStorage.setItem(data)
+    },
+    onError:(error) => {
+       console.log("login error",error)
+       toast.error("Fail to login")
+    }
+  })
+
+  const handleLogin = handleLoginSubmit(async(credentials,e) =>{
+     e.preventDefault()
+     try{
+        await staffLogin({
+          variables:{
+            username: credentials.username,
+            password: credentials.password
+          }
+        })
+     }catch(error){
+      console.log("error login")
+     }
+  })
   return (
     <div id="login-container" className="w-screen min-h-screen flex justify-center items-center">
+      <Toaster/>
       <div className="w-[35vw] min-h-[55vh] border-2 rounded border-gray-700 flex flex-col justify-around backdrop-blur-md">
         <div className="w-full h-8 mt-4 flex items-center justify-center">
           <h2 className="text-center text-black text-2xl font-bold">Login</h2>
         </div>
         <div className="w-full h-full p-8  flex flex-col">
-          <form action="" className="w-full h-full flex flex-col text-black">
+          <form onSubmit={handleLogin} action="" className="w-full h-full flex flex-col text-black">
             <InputField
               label="Username"
               name="username"
@@ -32,12 +67,11 @@ const Login = () => {
                 type="submit"
                 className="w-full h-full flex flex-row items-center justify-center text-white bg-gradient-to-r from-blue-900 to-gray-600"
               >
-                {/* {updateCardLoading ? (
+                {loginLoading ? (
                           <LoadingButton size={20} />
                         ) : (
-                          "Save Changes"
-                        )} */}
-                Login
+                          "Login"
+                        )}
               </button>
             </div>
           </form>

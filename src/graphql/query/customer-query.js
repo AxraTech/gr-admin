@@ -30,6 +30,7 @@ export const GET_CUSTOMERS_BY_ID = gql`
         id
         card_number
         balance
+        disabled
       }
     }
   }

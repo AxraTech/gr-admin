@@ -10,33 +10,35 @@ import toast, { Toaster } from "react-hot-toast";
 const CreateUser = () => {
   const navigate = useNavigate();
   const [uniquePassword, setUniquePassword] = useState();
-  const { register: customerRegister, handleSubmit: createCustomerSubmit,reset } =
-    useForm();
+  const {
+    register: customerRegister,
+    handleSubmit: createCustomerSubmit,
+    reset,
+  } = useForm();
   const [createCustomer, { loading: createCustomerLoading }] =
     useMutation(CREATE_CUSTOMER);
 
-    const handleCreateUser = createCustomerSubmit(async (credentials) => {
-      if (credentials.password !== credentials.confirm_password) {
-        toast.error("Please confirm password");
+  const handleCreateUser = createCustomerSubmit(async (credentials) => {
+    if (credentials.password !== credentials.confirm_password) {
+      toast.error("Please confirm password");
+    } else {
+      try {
+        await createCustomer({
+          variables: {
+            name: credentials.name,
+            phone: credentials.phone,
+            email: credentials.email,
+            disabled: false,
+            unique_password: uniquePassword,
+          },
+        });
+        toast.success("Customer created successfully");
+      } catch (err) {
+        toast.error("Error creating customer");
+        console.error("Error creating customer:", err); // Log the error for debugging
       }
-      else {
-        try {
-           await createCustomer({
-            variables: {
-              name: credentials.name,
-              phone: credentials.phone,
-              email: credentials.email,
-              disabled: false,
-              unique_password: uniquePassword,
-            },
-          });
-          toast.success("Customer created successfully");
-        } catch (err) {
-          toast.error("Error creating customer");
-          console.error("Error creating customer:", err); // Log the error for debugging
-        }
-      }
-    });
+    }
+  });
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -58,7 +60,7 @@ const CreateUser = () => {
 
   return (
     <div className=" mt-8 w-full h-full relative p-5 flex flex-col items-center justify-center overflow-y-auto">
-      <Toaster/>
+      <Toaster />
       <div className="min-w-[40rem] border border-gray-500 p-8 flex flex-col gap-12 rounded">
         <div>
           <h3 className="text-left text-2xl text-purple-900 font-semibold">
@@ -80,8 +82,6 @@ const CreateUser = () => {
                   inputType="text"
                   fullSize={false}
                   require={customerRegister}
-                  // value={formValues.name}
-                  // onChange={handleInputChange}
                 />
                 <InputField
                   label="Phone"
@@ -89,17 +89,6 @@ const CreateUser = () => {
                   placeholder="Enter phone number"
                   inputType="text"
                   require={customerRegister}
-                  // value={formValues.phone}
-                  // onChange={handleInputChange}
-                />
-                <InputField
-                  label="Email"
-                  name="email"
-                  placeholder="Enter email"
-                  inputType="email"
-                  require={customerRegister}
-                  // value={formValues.email}
-                  // onChange={handleInputChange}
                 />
               </div>
               <div className="flex flex-col items-start gap-2 pb-4">
@@ -116,13 +105,18 @@ const CreateUser = () => {
                   setUniquePassword={setUniquePassword}
                 />
                 <InputField
+                  label="Email"
+                  name="email"
+                  placeholder="Enter email"
+                  inputType="email"
+                  require={customerRegister}
+                />
+                {/* <InputField
                   label="Password"
                   name="password"
                   placeholder="Enter password"
                   inputType="password"
                   require={customerRegister}
-                  // value={formValues.password}
-                  // onChange={handleInputChange}
                 />
                 <InputField
                   label="Confirm password"
@@ -131,9 +125,7 @@ const CreateUser = () => {
                   inputType="password"
                   fullSize={false}
                   require={customerRegister}
-                  //  value={formValues.confirm_password}
-                  // onChange={handleInputChange}
-                />
+                /> */}
               </div>
             </div>
             <div className="h-12 w-full flex flow-row gap-4 items-center justify-start">
@@ -141,11 +133,13 @@ const CreateUser = () => {
                 type="submit"
                 className="bg-gray-200 flex flex-row items-center justify-center transition min-w-24 duration-500 border-purple-900 text-white from-blue-900 to-gray-600 rounded font-light bg-gradient-to-l"
               >
-                {createCustomerLoading?(<LoadingButton size={20}/>):"Create"}
+                {createCustomerLoading ? <LoadingButton size={20} /> : "Create"}
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/dashboard",{ state: { refetch: true } })}
+                onClick={() =>
+                  navigate("/dashboard", { state: { refetch: true } })
+                }
                 className=" bg-gray-200 transition min-w-24 duration-500 border-purple-900 text-white from-blue-900 to-gray-600 rounded font-light bg-gradient-to-l"
               >
                 Back

@@ -11,12 +11,14 @@ import toast, { Toaster } from "react-hot-toast";
 import LoadingButton from "../../../modules/common/icon/loading-icon";
 import { UPDATE_CUSTOMER_BY_ID } from "../../../graphql/mutation/customer-mutation";
 import { CARD_REGISTER } from "../../../graphql/mutation/card-mutation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const CustomerDetail = () => {
   const { customerId } = useParams();
   const navigate = useNavigate();
   const [isEdit, setisEdit] = useState(false);
   const [isRegister, setIsregister] = useState(false);
+  const [isAmountVisible, setIsAmountVisible] = useState({});
   const [
     cardRegisters,
     { loading: cardRegisterLoading, error: cardRegisterError },
@@ -32,6 +34,20 @@ const CustomerDetail = () => {
       variables: { id: customerId },
     }
   );
+
+  const toggleVisibility = (cardId) => {
+    setIsAmountVisible((prevState) =>({
+      ...prevState,
+      [cardId]: !prevState[cardId]
+    }))
+  }
+
+  const cards =
+    getCustomerbyId && getCustomerbyId.customers.length > 0
+      ? getCustomerbyId.customers[0].cards
+      : [];
+
+      console.log(cards)
 
   const [customerData, setCustomerData] = useState({
     id: "",
@@ -49,8 +65,6 @@ const CustomerDetail = () => {
       balance: "",
     },
   });
-
-  console.log(customerData);
 
   useEffect(() => {
     if (getCustomerbyId) {
@@ -98,10 +112,12 @@ const CustomerDetail = () => {
   };
 
   const handleCardRegister = cardRegisterSubmit(async (credentials) => {
-    if (credentials.password !== credentials.confirm_password) {
+    if (credentials.card_password !== credentials.confirm_password) {
       toast.error("Please Confirm Password");
     } else if (credentials.card_number.length > 6) {
       toast.error("Invalid Card");
+    } else if (credentials.card_password.length > 4) {
+      toast.error("Password should contain 4 number");
     } else {
       try {
         await cardRegisters({
@@ -112,6 +128,7 @@ const CustomerDetail = () => {
             customer_id: customerId,
           },
         });
+        toast.success("Card added");
       } catch (error) {
         console.log("error registering card");
         toast.error("Enable to register");
@@ -125,8 +142,8 @@ const CustomerDetail = () => {
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
       <Toaster />
       <div className="w-full max-h-[80vh] h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
-        <div className="w-full h-full overflow-auto rounded grid grid-cols-2 gap-3">
-          <div className="w-full h-full p-6 border bg-gray-100 rounded">
+        <div className="w-full h-full overflow-hidden rounded grid grid-cols-2 gap-3">
+          <div className="w-full max-h-[70vh] p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 <button
@@ -275,7 +292,7 @@ const CustomerDetail = () => {
               </div>
             </div>
           </div>
-          <div className="w-full h-full p-6 border bg-gray-100 rounded">
+          <div className="w-full max-h-[70vh] p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 {/* <button
@@ -291,7 +308,7 @@ const CustomerDetail = () => {
                   {isRegister ? "Cards" : "Add Card"}
                 </button>
               </div>
-              <div className="w-full h-full">
+              <div className="w-full h-4/5 overflow-auto">
                 {isRegister ? (
                   <form
                     className="w-full h-full overflow-y-auto flex flex-col gap-4"
@@ -375,7 +392,7 @@ const CustomerDetail = () => {
                         type="submit"
                         className="w-full h-full flex flex-row items-center justify-center text-white bg-gradient-to-r from-blue-900 to-gray-600"
                       >
-                        {updateCustomerLoading ? (
+                        {cardRegisterLoading ? (
                           <LoadingButton size={20} />
                         ) : (
                           "Register"
@@ -384,9 +401,43 @@ const CustomerDetail = () => {
                     </div>
                   </form>
                 ) : (
-                  <div className="w-full h-full overflow-y-auto flex flex-col gap-4">
-                    {!customerData.cards ? (
-                      <div></div>
+                  <div className="w-full h-full flex flex-col gap-4">
+                    {cards ? (
+                      <div className="w-full h-full  flex flex-col gap-4">
+                        {cards.map((card) => (
+                          <div className="grid grid-cols-2 w-full min-h-20 p-2 border border-purple-800 rounded">
+                            <div>
+                              <p className="text-left font-semibold mt-1">
+                                Card No - {card.card_number}
+                              </p>
+                            </div>
+                            <div className="w-full h-full grid grid-cols-1">
+                              <div className="w-full h-full flex flex-row justify-between gap-8 items-center">
+                                <button className="ml-4 bg-transparent border-none outline-none focus:outline-none" 
+                                onClick={()=>toggleVisibility(card.id)}
+                                >
+                                  {isAmountVisible[card.id] ? (
+                                    <FaEyeSlash color="purple" />
+                                  ) : (
+                                    <FaEye color="purple" />
+                                  )}
+                                </button>
+                                {isAmountVisible[card.id] ? (
+                                  <p className="text-right font-semibold">
+                                    {card.balance} KS
+                                  </p>
+                                ) : (
+                                  "*********"
+                                )}
+                              </div>
+
+                              <p className="text-right text-gray-600 font-normal">
+                                {card.disabled ? "Disabled" : "Active"}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <p className="text-purple-800 font-bold">

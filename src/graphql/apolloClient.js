@@ -11,7 +11,7 @@ const httpLink = createHttpLink({
       console.log("[graphQLErrors]", graphQLErrors);
       graphQLErrors.forEach(({ extensions }) => {
         if (extensions.code === "invalid-jwt") {
-         // authStorage.clearToken();
+          localStorage.removeItem("token");
           alert("Session Expired, Please Sign In With Your Credentials Again");
         }
       });
@@ -24,10 +24,12 @@ const httpLink = createHttpLink({
   
   const createApolloClient = () => {
     const authLink = setContext(async (_, { headers }) => {
+      const token = localStorage.getItem("token");
       try {
         return {
           headers: {
             ...headers,
+            Authorization: token ? `Bearer ${token}` : "", 
             "x-hasura-admin-secret":
             import.meta.env.VITE_APP_HASURA_ADMIN_SECRET,
           },

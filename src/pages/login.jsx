@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import InputField from "../modules/common/components/input-field";
 import { useMutation } from "@apollo/client";
 import { SIGN_IN_MUTATION } from "../graphql/mutation/sign-in-mutation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import LoadingButton from "../modules/common/icon/loading-icon";
 
@@ -76,7 +76,7 @@ const Login = () => {
             </div>
           </form>
           <div className="w-full h-auto mt-4">
-            <a className="text-white" href="/register">Create an account</a>
+            <Link to="/register" className="text-white" href="/register">Create an account</Link>
           </div>
         </div>
       </div>

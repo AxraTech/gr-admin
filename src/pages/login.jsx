@@ -76,7 +76,7 @@ const Login = () => {
             </div>
           </form>
           <div className="w-full h-auto mt-4">
-            <Link to="/register" className="text-white" href="/register">Create an account</Link>
+            <Link to="/register" className="text-white">Create an account</Link>
           </div>
         </div>
       </div>

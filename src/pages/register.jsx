@@ -8,7 +8,7 @@ import { CREATE_STAFF } from "../graphql/mutation/staff-role-mutation";
 import toast, { Toaster } from "react-hot-toast";
 import bcrypt from "bcryptjs";
 import LoadingButton from "../modules/common/icon/loading-icon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -134,9 +134,9 @@ const Register = () => {
             </div>
           </form>
           <div className="w-full h-auto mt-4">
-            <a className="text-white" href="/register">
+            <Link to="/" className="text-white">
               Already have an account?
-            </a>
+            </Link>
           </div>
         </div>
       </div>

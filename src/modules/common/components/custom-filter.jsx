@@ -37,7 +37,7 @@ const CustomFilter = ({ setOptions, option }) => {
       <div className="flex justify-between items-center w-11/12 h-full text-black transition duration-500">
         <p className="m-0">
           {option.find((opt) => opt.value === filter)?.label ||
-            "Select Category"}
+            "Select Status"}
         </p>
         <FaSortDown />
       </div>

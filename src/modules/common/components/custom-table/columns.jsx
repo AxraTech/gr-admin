@@ -137,7 +137,7 @@ export const terminalColumn = (navigate) => [
 
 export const cashinColumn = (navigate) => [
   columnHelper.accessor("amount", {
-    cell: (info) => <span>{info.getValue()}</span>,
+    cell: (info) => <span>{info.getValue().toLocaleString()}</span>,
     header: () => <span className="">Amount</span>,
   }),
   columnHelper.accessor("id", {

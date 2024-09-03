@@ -29,10 +29,11 @@ const CreateUser = () => {
             phone: credentials.phone,
             email: credentials.email,
             disabled: false,
-            unique_password: uniquePassword,
+            unique_password: "",
           },
         });
         toast.success("Customer created successfully");
+        reset();
       } catch (err) {
         toast.error("Error creating customer");
         console.error("Error creating customer:", err); // Log the error for debugging
@@ -92,7 +93,7 @@ const CreateUser = () => {
                 />
               </div>
               <div className="flex flex-col items-start gap-2 pb-4">
-                <InputField
+                {/* <InputField
                   label="Unique Password"
                   name="unique_password"
                   placeholder="Unique password"
@@ -103,7 +104,7 @@ const CreateUser = () => {
                   value={formValues.unique_password}
                   onChange={handleInputChange}
                   setUniquePassword={setUniquePassword}
-                />
+                /> */}
                 <InputField
                   label="Email"
                   name="email"
@@ -111,21 +112,6 @@ const CreateUser = () => {
                   inputType="email"
                   require={customerRegister}
                 />
-                {/* <InputField
-                  label="Password"
-                  name="password"
-                  placeholder="Enter password"
-                  inputType="password"
-                  require={customerRegister}
-                />
-                <InputField
-                  label="Confirm password"
-                  name="confirm_password"
-                  placeholder="Confirm password"
-                  inputType="password"
-                  fullSize={false}
-                  require={customerRegister}
-                /> */}
               </div>
             </div>
             <div className="h-12 w-full flex flow-row gap-4 items-center justify-start">

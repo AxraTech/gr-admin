@@ -66,7 +66,7 @@ const CardTransactionList = () => {
           </div> */}
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} isRowColor={true} />
     </div>
   );
 };

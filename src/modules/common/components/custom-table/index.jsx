@@ -3,10 +3,11 @@ import {
   useReactTable,
   flexRender,
 } from "@tanstack/react-table";
+import clsx from "clsx";
 import { useMemo, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
-const CustomTable = ({ column, tableData }) => {
+const CustomTable = ({ column, tableData, isRowColor=false }) => {
   const [pagination, setPagination] = useState(1);
   const [inputValue, setInputValue] = useState(pagination);
   const itemsPerPage = 5;
@@ -76,7 +77,10 @@ const CustomTable = ({ column, tableData }) => {
         </thead>
         <tbody className="">
           {table.getRowModel()?.rows?.map((row, index) => (
-            <tr key={row.id} className="border-b border-gray-400">
+            <tr key={row.id} className={clsx("border-b border-gray-400",{
+              "bg-red-200 text-black":isRowColor && row.original.card_transaction_type === 'purchase',
+              "bg-purple-100 text-black":isRowColor && row.original.card_transaction_type === 'cash in',
+            })}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="items-center p-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -116,15 +116,14 @@ const CustomerDetail = () => {
       toast.error("Please Confirm Password");
     } else if (credentials.card_number.length > 6) {
       toast.error("Invalid Card");
-    } else if (credentials.card_password.length > 4) {
-      toast.error("Password should contain 4 number");
+    } else if (credentials.card_password.length > 4 || isNaN(credentials.card_password) || credentials.card_password.length < 4) {
+      toast.error("Password should contain 4 numbers");
     } else {
       try {
         await cardRegisters({
           variables: {
             card_number: credentials.card_number.toString(),
             card_password: credentials.card_password,
-            balance: credentials.balance,
             customer_id: customerId,
           },
         });
@@ -148,7 +147,7 @@ const CustomerDetail = () => {
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 <button
-                  onClick={() => navigate("/dashboard/customer")}
+                  onClick={() => navigate("/dashboard/user")}
                   className="bg-transparent"
                 >
                   <FaArrowLeft size={20} color="white" />
@@ -365,24 +364,6 @@ const CustomerDetail = () => {
                           name="confirm_password"
                           placeholder="Confirm Password"
                           inputType="password"
-                          fullSize={true}
-                          require={cardRegister}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full h-12 grid grid-cols-2">
-                      <div>
-                        <p className="text-left mt-2 ml-3 font-semibold">
-                          Balance
-                        </p>
-                      </div>
-                      <div>
-                        <InputField
-                          label=""
-                          isLabel={false}
-                          name="balance"
-                          placeholder="Enter Balance"
-                          inputType="number"
                           fullSize={true}
                           require={cardRegister}
                         />

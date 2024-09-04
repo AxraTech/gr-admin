@@ -28,7 +28,7 @@ const CreateCashinAmount = () => {
       toast.success("Cash In Amount created");
       reset();
     } catch (err) {
-      toast.error("Error creating cashinAmount");
+      toast.error("Cannot create cash in amount");
       console.error("Error creating cashinAmount:", err);
     }
   });

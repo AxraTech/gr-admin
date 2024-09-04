@@ -54,7 +54,7 @@ const CreateTerminal = () => {
         toast.success("Terminal created successfully");
         reset();
       } catch (err) {
-        toast.error("Error creating terminal");
+        toast.error("Cannot create terminal");
         console.error("Error creating terminal:", err);
       }
     }

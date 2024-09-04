@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { FaSortDown } from "react-icons/fa";
 
-const CustomFilter = ({ setOptions, option }) => {
+const CustomFilter = ({ setOptions, option, selectLabel="Select Status" }) => {
   const [filter, setFilter] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
@@ -37,7 +37,7 @@ const CustomFilter = ({ setOptions, option }) => {
       <div className="flex justify-between items-center w-11/12 h-full text-black transition duration-500">
         <p className="m-0">
           {option.find((opt) => opt.value === filter)?.label ||
-            "Select Status"}
+            selectLabel}
         </p>
         <FaSortDown />
       </div>

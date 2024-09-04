@@ -35,7 +35,7 @@ const CreateUser = () => {
         toast.success("Customer created successfully");
         reset();
       } catch (err) {
-        toast.error("Error creating customer");
+        toast.error("Fail to create customer");
         console.error("Error creating customer:", err); // Log the error for debugging
       }
     }

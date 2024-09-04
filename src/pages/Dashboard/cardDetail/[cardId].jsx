@@ -28,9 +28,13 @@ const CardDetail = () => {
     balance:"",
     disabled:"",
     updated_at:"",
+    customer:{
+      id: "",
+      name: ""
+    }
   });
 
-  console.log(cardData)
+  console.log(cardData.customer)
 
   useEffect(() => {
     if (fetchCardbyId) {
@@ -144,17 +148,39 @@ const CardDetail = () => {
                     </div>
                     <input
                       className={clsx(
-                        "w-full border text-black focus:outline-none rounded p-2",
-                        {
-                          "border-purple-800": isEdit,
-                          "border-transparent": !isEdit,
-                        }
+                        "w-full border text-black focus:outline-none rounded border-transparent p-2",
+                        // {
+                        //   "border-purple-800": isEdit,
+                        //   "border-transparent": !isEdit,
+                        // }
                       )}
                       type="number"
-                      disabled={!isEdit}
+                      disabled={true}
                       name="balance"
                       value={cardData.balance === 0 ?"0": cardData.balance}
                       placeholder={cardData.balance === 0 ?"0": cardData.balance}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="w-full h-auto grid grid-cols-2">
+                    <div>
+                      <p className="text-left mt-2 ml-3 font-semibold">
+                        Customer:
+                      </p>
+                    </div>
+                    <input
+                      className={clsx(
+                        "w-full border text-black focus:outline-none rounded border-transparent p-2",
+                        // {
+                        //   "border-purple-800": isEdit,
+                        //   "border-transparent": !isEdit,
+                        // }
+                      )}
+                      type="text"
+                      disabled={true}
+                      name="balance"
+                      value={!cardData.customer?"Unregistered": cardData.customer.name}
+                      placeholder={!cardData.customer?"Unregistered": cardData.customer.name}
                       onChange={handleInputChange}
                     />
                   </div>

@@ -29,7 +29,7 @@ const CreateCard = () => {
         toast.success("Card created successfully");
         reset();
       } catch (err) {
-        toast.error("Error creating card");
+        toast.error("Cannot Create Card");
         console.error("Error creating card:", err);
       }
     

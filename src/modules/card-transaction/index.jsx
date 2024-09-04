@@ -2,18 +2,40 @@ import { useEffect, useState } from "react";
 import CustomTable from "../common/components/custom-table";
 import { cardTransactionColumn } from "../common/components/custom-table/columns";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import nProgress from "nprogress";
-import { GET_CARDS_TRANSACTION } from "../../graphql/query/card-transaction-query";
+import { GET_CARDS_TRANSACTION, GET_CARDS_TRANSACTION_BY_TYPE } from "../../graphql/query/card-transaction-query";
+import CustomFilter from "../common/components/custom-filter";
+import { transactionFilterOptions } from "../../lib/config";
 
 const CardTransactionList = () => {
   const navigate = useNavigate();
-  const {
+  const [filter, setFilter] = useState('all');
+  const [getTransacrions,{
     data: cardTransactionList,
     loading: fetchCardTransactionList,
     error: fetchCardTransactionError,
     refetch: transactionRefetch
-  } = useQuery(GET_CARDS_TRANSACTION);
+  }] = useLazyQuery(GET_CARDS_TRANSACTION);
+
+  const [getTransactionByType,{data:transactionListByType,loading:fetchTransactionListByType}] = useLazyQuery(GET_CARDS_TRANSACTION_BY_TYPE)
+
+  useEffect(() => {
+    if(filter === '' || filter === 'all'){
+      getTransacrions();
+    }else if(filter === 'cash in'){
+      getTransactionByType({
+        variables:{transactionType:"cash in"}
+       })
+    }
+    else{
+      getTransactionByType({
+            variables:{transactionType:"purchase"}
+           })
+    }
+  },[filter,getTransacrions,getTransactionByType])
+
+  console.log(filter)
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -23,8 +45,8 @@ const CardTransactionList = () => {
 
   const column = cardTransactionColumn(navigate);
 
-  const tableData = cardTransactionList? cardTransactionList.card_transactions: []
-  console.log(tableData)
+  const tableData = filter === '' || filter === 'all' ?(cardTransactionList? cardTransactionList.card_transactions: []):(transactionListByType? transactionListByType.card_transactions:[])
+
 
   useEffect(() => {
     if (fetchCardTransactionList) {
@@ -54,7 +76,7 @@ const CardTransactionList = () => {
         </div> */}
         <div className="flex flex-row items-center gap-8">
           <div className="">
-            {/* <CustomFilter setOptions={setFilter} option={cardTransactionFilterOptions} /> */}
+            <CustomFilter setOptions={setFilter} option={transactionFilterOptions} selectLabel="Select Type" />
           </div>
           {/* <div className="h-12">
             <button

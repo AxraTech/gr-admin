@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import clsx from "clsx";
 import { FaUserAlt } from "react-icons/fa";
-import { GET_CUSTOMERS_CREATED_LAST_SEVEN_DAYS } from "../../../../graphql/query/customer-query";
+import { GET_CUSTOMERS_CREATED_LAST_SEVEN_DAYS } from "../../../graphql/query/customer-query";
 
 const CustomCustomerList = () => {
   
@@ -35,7 +35,7 @@ const CustomCustomerList = () => {
                 </div>
               </div>
               <div className="w-full h-full flex items-center justify-center">
-                <p>{Customer.phone} KS</p>
+                <p>{Customer.phone}</p>
               </div>
               <div className="w-full h-full flex items-center justify-center">
                 <p>{Customer.email}</p>

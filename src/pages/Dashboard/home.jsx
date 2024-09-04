@@ -9,7 +9,7 @@ import TrasnactionDoughnutChart from "../../modules/common/components/transactio
 import { useState } from "react";
 import clsx from "clsx";
 import CustomTransctionList from "../../modules/common/components/custom-transaction-list";
-import CustomCustomerList from "../../modules/common/components/custom-table/custom-customer-list";
+import CustomCustomerList from "../../modules/common/components/custom-customer-list";
 
 
 const Home = () => {

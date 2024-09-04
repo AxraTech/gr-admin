@@ -59,8 +59,8 @@ const Home = () => {
             </div>
         ))}
      </div>
-     <div className="w-full h-full flex flex-row justify-between gap-8">
-        <div className="w-full h-[55vh] border-2 border-purple-800 rounded flex flex-col p-4">
+     <div className="w-full h-full flex flex-row justify-between gap-4">
+        <div className="w-[53rem] h-[55vh] border-2 border-purple-800 rounded flex flex-col p-4">
             <div className="w-full h-[5rem] flex flex-row border border-gray-500 bg-green-600 text-white items-center rounded-t">
                 <div
                 onClick={() => setIsTransaction(true)} 
@@ -96,4 +96,3 @@ const Home = () => {
   );
 };
 export default Home;
-

@@ -1,4 +1,7 @@
 import { gql } from "@apollo/client";
+import { formatISO, subDays } from "date-fns";
+
+const sevenDaysAgo = formatISO(subDays(new Date(), 7));
 
 export const GET_CUSTOMERS = gql`
   query getCustomers {
@@ -39,6 +42,24 @@ export const GET_CUSTOMERS_BY_ID = gql`
 export const GET_CUSTOMERS_BY_STATUS = gql`
   query getCustomersByStatus($disabled: Boolean!) {
     customers(where: { disabled: { _eq: $disabled } }) {
+      id
+      name
+      phone
+      email
+      created_at
+      updated_at
+      disabled
+      unique_password
+    }
+  }
+`;
+
+export const GET_CUSTOMERS_CREATED_LAST_SEVEN_DAYS = gql`
+  query getCustomer {
+    customers(
+      where: { created_at: { _gte: "${sevenDaysAgo}" } }
+      order_by: { created_at: desc }
+    ) {
       id
       name
       phone

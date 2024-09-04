@@ -129,6 +129,7 @@ const CustomerDetail = () => {
           },
         });
         toast.success("Card added");
+        cardRegisterReset();
       } catch (error) {
         console.log("error registering card");
         toast.error("Enable to register");
@@ -402,10 +403,10 @@ const CustomerDetail = () => {
                   </form>
                 ) : (
                   <div className="w-full h-full flex flex-col gap-4">
-                    {cards ? (
+                    {cards && cards.length > 0 ? (
                       <div className="w-full h-full  flex flex-col gap-4">
                         {cards.map((card) => (
-                          <div className="grid grid-cols-2 w-full min-h-20 p-2 border border-purple-800 rounded">
+                          <div key={card.id} className="grid grid-cols-2 w-full min-h-20 p-2 border border-purple-800 rounded">
                             <div>
                               <p className="text-left font-semibold mt-1">
                                 Card No - {card.card_number}

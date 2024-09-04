@@ -25,6 +25,7 @@ import FacilityServiceDetail from "./facilityServiceDetail/[facilityServiceid]";
 import CardTransactionList from "../../modules/card-transaction";
 import CardTransactionDetail from "./cardTransactionDetail/[cardTransactionId]";
 import { SlLogout } from "react-icons/sl";
+import Home from "./home";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -70,14 +71,15 @@ const Dashboard = () => {
           </div>
           <div id="progress-bar-container" className="flex-1 mt-[6rem] h-[calc(100% - 6rem)] overflow-y-auto w-full bg-white relative">
             <Routes>
-              <Route path="*" element={<UserList/>} />
+              <Route path="*" element={<Home/>} />
+              <Route path="user" element={<UserList/>} />
               <Route path="card" element={<CardList/>} />
               <Route path="facility" element={<FacilityList/>} />
               <Route path="facilityservice" element={<FacilityServiceList/>} />
               <Route path="cashinamount" element={<CashinList/>} />
               <Route path="terminal" element={<TerminalList/>} />
               <Route path="cardtransaction" element={<CardTransactionList/>} />
-              <Route path="customerlists/createcustomer" element={<CreateUser />} />
+              <Route path="user/customerlists/createcustomer" element={<CreateUser />} />
               <Route path="card/cardlists/createcard" element={<CreateCard />} />
               <Route path="facility/facilitylists/createfacility" element={<CreateFacility />} />
               <Route path="cashinamount/cashinlists/createcashin" element={<CreateCashinAmount />} />

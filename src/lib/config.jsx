@@ -5,8 +5,15 @@ import { CiCreditCard1 } from "react-icons/ci";
 import { GrServicePlay } from "react-icons/gr";
 import { BsFillTerminalFill } from "react-icons/bs";
 import { SiCashapp } from "react-icons/si";
+import { IoHome } from "react-icons/io5";
 
 export const SidebarRoutes = [
+    {
+        id: 'home',
+        label: 'Home',
+        path: 'home',
+        icon: <IoHome size={20}/>
+    },
     {
         id: 'customer',
         label: 'Customer',

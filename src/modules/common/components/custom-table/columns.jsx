@@ -106,7 +106,7 @@ export const facilityServiceColumn = (navigate) => [
     header: () => <span className="">Service</span>,
   }),
   columnHelper.accessor("price", {
-    cell: (info) => <span>{info.getValue()}</span>,
+    cell: (info) => <span>{info.getValue().toLocaleString()}</span>,
     header: () => <span className="column-head">Price</span>,
   }),
   columnHelper.accessor("id", {

@@ -88,6 +88,21 @@ export const cardFilterOptions = [
     },
 ]
 
+export const transactionFilterOptions = [
+    {
+        value: "all",
+        label: "All"
+    },
+    {
+        value: 'cash in',
+        label: "Cash In"
+    },
+    {
+        value: 'purchase',
+        label: "Purchase"
+    },
+]
+
 export const terminalFilterOptions = [
     {
         value: "all",

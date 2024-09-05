@@ -49,7 +49,7 @@ const CreateFacilityService = () => {
           toast.success("Service created successfully");
           reset();
         } catch (err) {
-          toast.error("Error creating facilityService");
+          toast.error("Fail to create facilityService");
           console.error("Error creating facilityService:", err);
         }
       }

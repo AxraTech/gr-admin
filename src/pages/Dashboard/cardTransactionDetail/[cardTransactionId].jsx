@@ -157,8 +157,8 @@ const CardTransactionDetail = () => {
                       type="text"
                       disabled={!isEdit}
                       name="amount"
-                      value={cardTransactionData.amount || ""}
-                      placeholder={cardTransactionData.amount || ""}
+                      value={cardTransactionData.amount.toLocaleString() || ""}
+                      placeholder={cardTransactionData.amount.toLocaleString() || ""}
                       onChange={handleInputChange}
                     />
                   </div>

@@ -132,11 +132,11 @@ const CashinDetail = () => {
                           "border-transparent": !isEdit,
                         }
                       )}
-                      type="text"
+                      type={`${isEdit?"number":"text"}`}
                       disabled={!isEdit}
                       name="amount"
-                      value={cashinData.amount || ""}
-                      placeholder={cashinData.amount || ""}
+                      value={isEdit?cashinData.amount:cashinData.amount.toLocaleString()}
+                      placeholder={isEdit?cashinData.amount:cashinData.amount.toLocaleString()}
                       onChange={handleInputChange}
                     />
                   </div>

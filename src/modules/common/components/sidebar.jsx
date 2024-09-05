@@ -10,8 +10,8 @@ const Sidebar = () => {
                     <div className="w-full h-4"></div>
                     <div className="w-full h-full flex justify-center items-center">
                         <div className="flex flex-row justify-around h-full w-full items-center gap-2">
-                            <div className="flex justify-center items-center w-14 h-14 rounded-full border border-white">
-                                <p className="text-white font-bold text-2xl">GR</p>
+                            <div className="flex justify-center items-center w-14 h-14 rounded-full border overflow-hidden border-white">
+                                <img className="object-cover max-w-full max-h-full" src="/gr-logo.png" alt="logo" />
                                 </div>
                         <h2 className="text-white text-xl font-semibold">GR Hotel</h2>
                         </div>

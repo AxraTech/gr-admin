@@ -167,11 +167,11 @@ const FacilityServiceDetail = () => {
                           "border-transparent": !isEdit,
                         }
                       )}
-                      type="text"
+                      type={`${isEdit?"number":"text"}`}
                       disabled={!isEdit}
                       name="price"
-                      value={facilityServiceData.price|| ""}
-                      placeholder={facilityServiceData.price || ""}
+                      value={isEdit?facilityServiceData.price:facilityServiceData.price.toLocaleString()}
+                      placeholder={isEdit?facilityServiceData.price:facilityServiceData.price.toLocaleString()}
                       onChange={handleInputChange}
                     />
                   </div>

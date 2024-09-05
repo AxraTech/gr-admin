@@ -78,8 +78,8 @@ const CustomTable = ({ column, tableData, isRowColor=false }) => {
         <tbody className="">
           {table.getRowModel()?.rows?.map((row, index) => (
             <tr key={row.id} className={clsx("border-b border-gray-400",{
-              "bg-red-200 text-black":isRowColor && row.original.card_transaction_type === 'purchase',
-              "bg-purple-100 text-black":isRowColor && row.original.card_transaction_type === 'cash in',
+              // "bg-red-200 text-black":isRowColor && row.original.card_transaction_type === 'purchase',
+              // "bg-purple-100 text-black":isRowColor && row.original.card_transaction_type === 'cash in',
             })}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="items-center p-4">

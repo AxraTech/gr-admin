@@ -38,7 +38,10 @@ const CustomTransctionList = () => {
               <div className="w-full h-full flex items-center justify-center">
                 <p>{transaction.amount.toLocaleString()} KS</p>
               </div>
-              <div className="w-full h-full flex items-center justify-center">
+              <div className={clsx("w-full h-full flex items-center justify-center font-semibold",{
+                "text-red-700":transaction.card_transaction_type === "purchase",
+                "text-green-500":transaction.card_transaction_type === "cash in"
+              })}>
                 <p>{transaction.card_transaction_type}</p>
               </div>
             </div>

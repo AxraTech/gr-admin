@@ -150,11 +150,11 @@ const CardDetail = () => {
                           "border-transparent": !isEdit,
                         }
                       )}
-                      type="number"
+                      type={`${isEdit?"number":"text"}`}
                       disabled={!isEdit}
                       name="balance"
-                      value={cardData.balance === 0 ?"0": cardData.balance}
-                      placeholder={cardData.balance === 0 ?"0": cardData.balance}
+                      value={cardData.balance === 0 ?"0": (isEdit?cardData.balance:cardData.balance.toLocaleString())}
+                      placeholder={cardData.balance === 0 ?"0": (isEdit?cardData.balance:cardData.balance.toLocaleString())}
                       onChange={handleInputChange}
                     />
                   </div>

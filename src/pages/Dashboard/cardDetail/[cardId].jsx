@@ -154,11 +154,11 @@ const CardDetail = () => {
                         //   "border-transparent": !isEdit,
                         // }
                       )}
-                      type="number"
+                      type="text"
                       disabled={true}
                       name="balance"
-                      value={!cardData.customer?"Unregistered": cardData.customer.name}
-                      placeholder={!cardData.customer?"Unregistered": cardData.customer.name}
+                      value={!cardData.customer?"Unregistered": cardData.balance.toLocaleString()}
+                      placeholder={!cardData.customer?"Unregistered": cardData.balance.toLocaleString()}
                       onChange={handleInputChange}
                     />
                   </div>

@@ -62,3 +62,25 @@ export const GET_CARDS_TRANSACTION_SEVENDAYS = gql`
     }
   }
 `;
+
+export const GET_CARDS_TRANSACTION_BY_TYPE = gql`
+  query getCardTransactionByType($transactionType: String!) {
+    card_transactions(
+      where: { card_transaction_type: { _eq: $transactionType } }
+      order_by: { created_at: desc }
+    ) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        id
+        card_number
+      }
+    }
+  }
+`;

@@ -26,13 +26,11 @@ export const CARD_REGISTER = gql`
     $card_number: String!
     $card_password: String!
     $customer_id: uuid!
-    $balance: numeric!
   ) {
     cardRegister(
       card_number: $card_number
       card_password: $card_password
       customer_id: $customer_id
-      balance: $balance
     ) {
       message
     }

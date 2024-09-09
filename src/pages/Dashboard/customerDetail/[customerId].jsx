@@ -141,9 +141,9 @@ const CustomerDetail = () => {
   return (
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
       <Toaster />
-      <div className="w-full max-h-[80vh] h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
-        <div className="w-full h-full overflow-hidden rounded grid grid-cols-2 gap-3">
-          <div className="w-full max-h-[70vh] p-6 border bg-gray-100 rounded">
+      <div className="w-full lg:max-h-[80vh] lg:h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
+        <div className="w-full h-full overflow-hidden rounded lg:grid lg:grid-cols-2 md:grid md:grid-cols-1 lg:gap-3 md:gap-4">
+          <div className="w-full lg:max-h-[70vh] md:max-h-[40vh] p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 <button
@@ -292,7 +292,7 @@ const CustomerDetail = () => {
               </div>
             </div>
           </div>
-          <div className="w-full max-h-[70vh] p-6 border bg-gray-100 rounded">
+          <div className="w-full max-h-[40vh] p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 {/* <button

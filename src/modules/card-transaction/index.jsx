@@ -11,6 +11,8 @@ import { transactionFilterOptions } from "../../lib/config";
 const CardTransactionList = () => {
   const navigate = useNavigate();
   const [filter, setFilter] = useState('all');
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
   const [getTransacrions,{
     data: cardTransactionList,
     loading: fetchCardTransactionList,
@@ -43,7 +45,7 @@ const CardTransactionList = () => {
     }
   }, [location.state, transactionRefetch]);
 
-  const column = cardTransactionColumn(navigate);
+  const column = cardTransactionColumn(navigate,pagination,itemsPerPage);
 
   const tableData = filter === '' || filter === 'all' ?(cardTransactionList? cardTransactionList.card_transactions: []):(transactionListByType? transactionListByType.card_transactions:[])
 
@@ -88,7 +90,7 @@ const CardTransactionList = () => {
           </div> */}
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} isRowColor={true} />
+      <CustomTable column={column} tableData={tableData} isRowColor={true} setPaginationProps={setPagination} />
     </div>
   );
 };

@@ -66,7 +66,7 @@ const Register = () => {
       className="w-screen min-h-screen flex justify-center items-center"
     >
         <Toaster/>
-      <div className="w-[35vw] md:w-[60vw] lg:w-[40vw] min-h-[55vh] border-2 rounded border-gray-700 flex flex-col justify-around backdrop-blur-md">
+      <div className="lg:w-[35vw] lg:min-h-[55vh] md:w-[80vw] md:min-h-[45vh] border-2 rounded border-gray-700 flex flex-col justify-around lg:bg-white md:bg-gray-500 lg:bg-opacity-5 md:bg-opacity-70 md:backdrop-blur-none lg:backdrop-blur-md">
         <div className="w-full h-8 mt-4 flex items-center justify-center">
           <h2 className="text-center text-black text-2xl font-bold">
             Register
@@ -74,7 +74,7 @@ const Register = () => {
         </div>
         <div className="w-full h-full p-8  flex flex-col">
           <form onSubmit={handleCreateStaff} action="" className="w-full h-full flex flex-col text-black">
-            <div className="w-full h-[40vh] grid grid-cols-2 gap-6">
+            <div className="w-full lg:h-[40vh] md:h-[30vh] grid grid-cols-2 gap-6">
               <div className="w-full h-full">
                 <InputField
                   label="Nmae"

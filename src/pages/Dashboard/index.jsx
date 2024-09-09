@@ -51,11 +51,11 @@ const Dashboard = () => {
     return(
         <div className="flex h-screen w-screen">
         <Sidebar />
-        <div className="flex-1 flex-col h-screen ml-[17vw] w-dashboard-main-content overflow-auto pl-5 pb-5">
+        <div className="flex-1 flex-col lg:h-screen lg:ml-[17vw] md:ml-0 w-dashboard-main-content overflow-auto lg:-5 lg:pb-5 md:pl-0">
           <div  className="w-full h-24 border-b border-gray-500 p-2 bg-gray-100 fixed z-10">
             <div className="w-full h-full flex flex-row items-center justify-between">
               <div className="h-full flex items-center justify-center text-purple-900">
-                <h2 className="text-3xl font-bold">Dashboard</h2>
+                <h2 className="text-3xl font-bold lg:ml-0 md:ml-4">Dashboard</h2>
               </div>
               <div className="h-full w-full flex flex-row items-center justify-end">
                 <button
@@ -63,7 +63,7 @@ const Dashboard = () => {
                   localStorage.clear();
                    navigate('/')
                 }}
-                className="min-w-12 mr-[20vw] bg-transparent hover:cursor-pointer border-none hover:text-gray-700 hover:border-none h-full flex flex-row items-center gap-2">
+                className="min-w-12 lg:mr-[20vw] md:mr-0 bg-transparent hover:cursor-pointer border-none hover:text-gray-700 hover:border-none h-full flex flex-row items-center gap-2">
                   <SlLogout size={20}/><p>Logout</p>
                 </button>
               </div>

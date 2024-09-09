@@ -4,7 +4,7 @@ import { SidebarRoutes } from "../../../lib/config";
 const Sidebar = () => {
     const navigate = useNavigate();
     return(
-        <aside className="fixed top-0 left-0 h-screen w-[17vw] z-10 bg-gradient-to-b from-blue-900 to-gray-800">
+        <aside className="fixed top-0 left-0 lg:h-screen lg:w-[17vw] z-10 bg-gradient-to-b from-blue-900 to-gray-800 md:hidden lg:block">
             <div className="w-full h-full flex flex-col pl-5 pr-5 pt0">
                 <div className="w-full h-24 border-b border-white flex flex-col">
                     <div className="w-full h-4"></div>

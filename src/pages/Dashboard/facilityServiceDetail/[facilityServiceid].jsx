@@ -107,7 +107,7 @@ const FacilityServiceDetail = () => {
   return (
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
       <Toaster />
-      <div className="w-1/2 max-h-[80vh] h-[80vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
+      <div className="lg:w-1/2 md:w-full lg:max-h-[80vh] lg:h-[80vh] md:max-h-[80vh] md:h-[45vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
         <div className="w-full h-full overflow-auto rounded grid grid-cols-1">
           <div className="w-full h-full p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">

@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <div id="login-container" className="w-screen min-h-screen flex justify-center items-center">
       <Toaster/>
-      <div className="w-[35vw] min-h-[55vh] border-2 rounded border-gray-700 flex flex-col justify-around backdrop-blur-md">
+      <div className="lg:w-[35vw] lg:min-h-[55vh] md:w-[80vw] md:min-h-[45vh] border-2 rounded border-gray-700 flex flex-col lg:bg-white md:bg-gray-500 lg:bg-opacity-5 md:bg-opacity-80 justify-around md:backdrop-blur-none lg:backdrop-blur-md">
         <div className="w-full h-8 mt-4 flex items-center justify-center">
           <h2 className="text-center text-black text-2xl font-bold">Login</h2>
         </div>

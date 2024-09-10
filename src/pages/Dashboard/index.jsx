@@ -26,10 +26,12 @@ import CardTransactionList from "../../modules/card-transaction";
 import CardTransactionDetail from "./cardTransactionDetail/[cardTransactionId]";
 import { SlLogout } from "react-icons/sl";
 import Home from "./home";
+import MobileNav from "../../modules/common/components/mobile-nav";
+import { VscThreeBars } from "react-icons/vsc";
 
 const Dashboard = () => {
   const location = useLocation();
-
+  const [isCollapse,setIsCollapse] = useState(true);
   useEffect(() => {
     const loadData = async () => {
       nProgress.configure({
@@ -51,13 +53,14 @@ const Dashboard = () => {
     return(
         <div className="flex h-screen w-screen">
         <Sidebar />
+        <MobileNav isCollapse={isCollapse} setIsCollapse={setIsCollapse}/>
         <div className="flex-1 flex-col lg:h-screen lg:ml-[17vw] md:ml-0 w-dashboard-main-content overflow-auto lg:-5 lg:pb-5 md:pl-0">
           <div  className="w-full h-24 border-b border-gray-500 p-2 bg-gray-100 fixed z-10">
             <div className="w-full h-full flex flex-row items-center justify-between">
               <div className="h-full flex items-center justify-center text-purple-900">
                 <h2 className="text-3xl font-bold lg:ml-4 md:ml-4">Dashboard</h2>
               </div>
-              <div className="h-full w-full flex flex-row items-center justify-end">
+              <div className="h-full w-full md:hidden lg:flex flex-row items-center justify-end">
                 <button
                 onClick={() => {
                   localStorage.clear();
@@ -67,6 +70,18 @@ const Dashboard = () => {
                   <SlLogout size={20}/><p>Logout</p>
                 </button>
               </div>
+              <div className="h-full w-full md:flex lg:hidden flex-row items-center justify-end">
+                <button
+                onClick={() => {
+                  setIsCollapse(false)
+                  // localStorage.clear();
+                  //  navigate('/')
+                }}
+                className="min-w-12 lg:mr-[17vw] md:mr-0 bg-transparent hover:cursor-pointer border-none hover:text-gray-700 hover:border-none h-full flex flex-row items-center gap-2">
+                  <VscThreeBars size={30}/>
+                </button>
+              </div>
+              
             </div>
           </div>
           <div id="progress-bar-container" className="flex-1 mt-[6rem] h-[calc(100% - 6rem)] overflow-y-auto w-full bg-white relative">

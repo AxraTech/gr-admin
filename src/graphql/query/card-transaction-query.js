@@ -14,6 +14,13 @@ export const GET_CARDS_TRANSACTION = gql`
       card_transaction_type
       created_at
       updated_at
+      card{
+       id
+       card_number
+      }
+       terminal{
+        terminal_number
+      }
     }
   }
 `;
@@ -84,3 +91,27 @@ export const GET_CARDS_TRANSACTION_BY_TYPE = gql`
     }
   }
 `;
+
+export const GET_CARDS_TRANSACTION_BY_CARD_NUMBER = gql`
+  query getCardTransactionByCardNumber($card_number: String!) {
+    card_transactions(where: { card: { card_number: { _eq: $card_number } } }) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        card_number
+      }
+      cardTransactionTypeByCardTransactionType {
+        name
+      }
+      terminal {
+        terminal_number
+      }
+    }
+  }
+`

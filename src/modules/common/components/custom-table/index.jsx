@@ -7,9 +7,9 @@ import clsx from "clsx";
 import { useMemo, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
-const CustomTable = ({ column, tableData, isRowColor=false }) => {
+const CustomTable = ({ column, tableData, isRowColor=false, navigate, setPaginationProps }) => {
   const [pagination, setPagination] = useState(1);
-  const [inputValue, setInputValue] = useState(pagination);
+  const [inputValue, setInputValue] = useState(1);
   const itemsPerPage = 5;
   const totalPages = Math.ceil(tableData.length / itemsPerPage);
   const currentItems = useMemo(() => {
@@ -25,15 +25,14 @@ const CustomTable = ({ column, tableData, isRowColor=false }) => {
   });
 
   const handlePageChange = (direction) => {
-    console.log(direction);
     setPagination((prevPagination) => {
-      const currentPage = prevPagination;
       const newPage =
         direction === "next" ? prevPagination + 1 : prevPagination - 1;
       if (newPage < 1 || newPage > totalPages) {
-        return currentPage; // Do not change the page if out of bounds
+        return prevPagination; 
       }
       setInputValue(newPage);
+      setPaginationProps(newPage);
       return newPage;
     });
   };
@@ -43,13 +42,24 @@ const CustomTable = ({ column, tableData, isRowColor=false }) => {
     setInputValue(value); // Allow the input value to update
   };
 
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     const newPage = Number(event.target.value);
+  //     if (newPage >= 1 && newPage <= totalPages) {
+  //       setPagination(newPage); // Change page only when Enter is pressed
+  //     } else {
+  //       setInputValue(pagination); // Reset input to current page if invalid
+  //     }
+  //   }
+  // };
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       const newPage = Number(event.target.value);
       if (newPage >= 1 && newPage <= totalPages) {
-        setPagination(newPage); // Change page only when Enter is pressed
+        setPagination(newPage);
+        setPaginationProps(newPage);
       } else {
-        setInputValue(pagination); // Reset input to current page if invalid
+        setInputValue(pagination);
       }
     }
   };

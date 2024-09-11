@@ -1,7 +1,8 @@
 import { gql } from "@apollo/client";
-import { formatISO, subDays } from "date-fns";
+import { formatISO, subDays, startOfDay } from "date-fns";
 
 const sevenDaysAgo = formatISO(subDays(new Date(), 7));
+const today = formatISO(startOfDay(new Date()));
 
 export const GET_CARDS_TRANSACTION = gql`
   query getCardTransaction {
@@ -14,6 +15,17 @@ export const GET_CARDS_TRANSACTION = gql`
       card_transaction_type
       created_at
       updated_at
+      card{
+       id
+       card_number
+       customer{
+          id
+          name
+        }
+      }
+       terminal{
+        terminal_number
+      }
     }
   }
 `;
@@ -31,6 +43,10 @@ export const GET_CARDS_TRANSACTION_BY_ID = gql`
       updated_at
       card{
         card_number
+        customer{
+          id
+          name
+        }
       }
       cardTransactionTypeByCardTransactionType{
         name
@@ -58,6 +74,10 @@ export const GET_CARDS_TRANSACTION_SEVENDAYS = gql`
        card{
         id
         card_number
+        customer{
+          id
+          name
+        }
       }
     }
   }
@@ -80,6 +100,101 @@ export const GET_CARDS_TRANSACTION_BY_TYPE = gql`
       card {
         id
         card_number
+        customer{
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CARDS_TRANSACTION_BY_CARD_NUMBER = gql`
+  query getCardTransactionByCardNumber($card_number: String!) {
+    card_transactions(where: { card: { card_number: { _eq: $card_number } } }) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        card_number
+        customer{
+          id
+          name
+        }
+      }
+      cardTransactionTypeByCardTransactionType {
+        name
+      }
+      terminal {
+        terminal_number
+      }
+    }
+  }
+`
+
+export const GET_CARDS_TRANSACTION_TODAY = gql`
+  query getCardTransactionToday {
+    card_transactions(
+      where: {
+        created_at: { _gte: "${today}" }
+      }
+      order_by: { created_at: desc }
+    ) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        id
+        card_number
+        customer{
+          id
+          name
+        }
+      }
+      terminal {
+        terminal_number
+      }
+    }
+  }
+`;
+
+export const GET_CARDS_TRANSACTION_TODAY_BY_TYPE = gql`
+  query getCardTransactionTodayByType($transactionType: String!) {
+    card_transactions(
+      where: {
+        created_at: { _gte: "${today}" }
+        card_transaction_type: { _eq: $transactionType }
+      }
+      order_by: { created_at: desc }
+    ) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        id
+        card_number
+        customer{
+          id
+          name
+        }
+      }
+      terminal {
+        terminal_number
       }
     }
   }

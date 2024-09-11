@@ -11,6 +11,8 @@ import { terminalFilterOptions } from "../../lib/config";
 const TerminalList = () => {
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
 
   const [getTerminals,{
     data: terminalList,
@@ -29,7 +31,7 @@ const TerminalList = () => {
   const terminalLists = terminalList ? terminalList.terminals : [];
   console.log(terminalLists)
 
-  const column = terminalColumn(navigate);
+  const column = terminalColumn(navigate,pagination,itemsPerPage);
   
   useEffect(() => {
     if(filter === '' || filter === 'all'){
@@ -88,7 +90,7 @@ const TerminalList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination}/>
     </div>
   );
 };

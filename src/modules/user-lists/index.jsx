@@ -18,6 +18,10 @@ const UserList = () => {
     error: fetchCustomerError,
     refetch: customerRefetch
   }] = useLazyQuery(GET_CUSTOMERS);
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
+
+  console.log(pagination)
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -31,7 +35,7 @@ const UserList = () => {
   const customerLists = customerList ? customerList.customers : [];
   console.log(customerLists)
 
-  const column = userColumn(navigate);
+  const column = userColumn(navigate,pagination,itemsPerPage);
   
   useEffect(() => {
     if(filter === '' || filter === 'all'){
@@ -90,7 +94,7 @@ const UserList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination} />
     </div>
   );
 };

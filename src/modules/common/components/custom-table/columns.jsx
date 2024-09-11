@@ -3,7 +3,11 @@ import clsx from "clsx";
 import { FaRegEdit } from "react-icons/fa";
 
 const columnHelper = createColumnHelper();
-export const userColumn = (navigate) => [
+export const userColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("name", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Name</span>,
@@ -33,7 +37,11 @@ export const userColumn = (navigate) => [
   }),
 ];
 
-export const cardColumn = (navigate) => [
+export const cardColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("card_number", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Card Number</span>,
@@ -70,7 +78,11 @@ export const cardColumn = (navigate) => [
   }),
 ];
 
-export const facilityColumn = (navigate) => [
+export const facilityColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("name", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Name</span>,
@@ -100,7 +112,11 @@ export const facilityColumn = (navigate) => [
   }),
 ];
 
-export const facilityServiceColumn = (navigate) => [
+export const facilityServiceColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("name", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Service</span>,
@@ -126,7 +142,11 @@ export const facilityServiceColumn = (navigate) => [
   }),
 ];
 
-export const terminalColumn = (navigate) => [
+export const terminalColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("terminal_number", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Terminal Number</span>,
@@ -161,7 +181,11 @@ export const terminalColumn = (navigate) => [
   }),
 ];
 
-export const cashinColumn = (navigate) => [
+export const cashinColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("amount", {
     cell: (info) => <span>{info.getValue().toLocaleString()}</span>,
     header: () => <span className="">Amount</span>,
@@ -181,7 +205,11 @@ export const cashinColumn = (navigate) => [
   }),
 ];
 
-export const cardTransactionColumn = (navigate) => [
+export const cardTransactionColumn = (navigate,pagination, itemsPerPage) => [
+  columnHelper.accessor("id", {
+    cell: (info) => <span>{(pagination - 1) * itemsPerPage + (info.row.index + 1)}</span>,
+    header: () => <span className="">No</span>,
+  }),
   columnHelper.accessor("transaction_number", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Transaction No</span>,
@@ -202,6 +230,14 @@ export const cardTransactionColumn = (navigate) => [
       </span>
     ),
     header: () => <span className="">Type</span>,
+  }),
+  columnHelper.accessor("created_at", {
+    cell: (info) => {
+      const date = new Date(info.getValue());
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      return <span>{formattedDate}</span>;
+    },
+    header: () => <span className="">Created Time</span>,
   }),
   columnHelper.accessor("id", {
     cell: (info) => (

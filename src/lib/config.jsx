@@ -99,7 +99,7 @@ export const transactionFilterOptions = [
     },
     {
         value: 'purchase',
-        label: "Purchase"
+        label: "Cash Out"
     },
 ]
 

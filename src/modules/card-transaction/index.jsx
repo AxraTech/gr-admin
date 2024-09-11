@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CustomTable from "../common/components/custom-table";
 import { cardTransactionColumn } from "../common/components/custom-table/columns";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import nProgress from "nprogress";
 import { GET_CARDS_TRANSACTION, GET_CARDS_TRANSACTION_BY_CARD_NUMBER, GET_CARDS_TRANSACTION_BY_TYPE } from "../../graphql/query/card-transaction-query";
@@ -11,6 +11,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const CardTransactionList = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [filter, setFilter] = useState('');
   const [pagination, setPagination] = useState(1);
   const [cardNumberSearch, setCardNumberSearch] = useState('');
@@ -142,7 +143,7 @@ const CardTransactionList = () => {
         <div className="flex flex-row items-center gap-4">
           <input
           placeholder="Enter card number"
-            className="w-[15vw] p-2 rounded border border-purple-800"
+            className="lg:w-[15vw] md:w-[25vw] p-2 rounded border border-purple-800"
             type="text"
             value={cardNumberSearch}
             onChange={(e) =>setCardNumberSearch(e.target.value)}

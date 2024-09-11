@@ -231,6 +231,14 @@ export const cardTransactionColumn = (navigate,pagination, itemsPerPage) => [
     ),
     header: () => <span className="">Type</span>,
   }),
+  columnHelper.accessor("created_at", {
+    cell: (info) => {
+      const date = new Date(info.getValue());
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      return <span>{formattedDate}</span>;
+    },
+    header: () => <span className="">Created Time</span>,
+  }),
   columnHelper.accessor("id", {
     cell: (info) => (
       <button

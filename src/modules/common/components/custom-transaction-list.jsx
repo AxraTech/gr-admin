@@ -9,18 +9,20 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import CustomFilter from "./custom-filter";
 import { transactionFilterOptions } from "../../../lib/config";
+import { useLocation } from "react-router-dom";
 
 const CustomTransctionList = () => {
   const [transactionLists, setTransactionLists] = useState({});
+  const location = useLocation();
   const [filter, setFilter] = useState("");
   const [cardNumberSearch, setCardNumberSearch] = useState("");
   const [
     getDailyTransaction,
-    { data: dailyTransaction, loading: dailyTransactionLoading },
+    { data: dailyTransaction, loading: dailyTransactionLoading, refetch:refetchDailyTransactions },
   ] = useLazyQuery(GET_CARDS_TRANSACTION_TODAY);
   const [
     getDailyTransactionByType,
-    { data: dailyTransactionByType, loading: dailyTransactionByTypeLoading },
+    { data: dailyTransactionByType, loading: dailyTransactionByTypeLoading, refetch:refetchDailyTransactionsByType },
   ] = useLazyQuery(GET_CARDS_TRANSACTION_TODAY_BY_TYPE);
 
   const [getTransactionByCardNumber, {
@@ -88,6 +90,13 @@ const CustomTransctionList = () => {
     fetchTransactionLists();
   }, [filter, getDailyTransaction]);
 
+  useEffect(() => {
+    if (location.state?.refetch) {
+      refetchDailyTransactions();
+      refetchDailyTransactionsByType();
+    }
+  }, [location.state, refetchDailyTransactions]);
+
   const handleSearch = () => {
     if (cardNumberSearch.trim()) {
      // nProgress.start();
@@ -124,7 +133,7 @@ const CustomTransctionList = () => {
           <div className="flex flex-row items-center gap-4">
             <input
               placeholder="Enter card number"
-              className="w-[15vw] p-2 rounded border border-purple-800"
+              className="lg:w-[15vw] md:w-[25vw] p-2 rounded border border-purple-800"
               type="text"
               value={cardNumberSearch}
               onChange={(e) => setCardNumberSearch(e.target.value)}
@@ -214,7 +223,7 @@ const CustomTransctionList = () => {
           })
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            No transactions found.
+            No transaction today.
           </div>
         )}
       </div>

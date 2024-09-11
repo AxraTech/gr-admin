@@ -130,7 +130,7 @@ const Home = () => {
                 }
               )}
             >
-              Weekly Onboarded Customer
+              Daily Onboarded Customer
             </div>
           </div>
           <div className="w-full h-full overflow-auto border pt-2 bg-gray-100 border-gray-200">

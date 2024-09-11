@@ -30,7 +30,7 @@ const MobileNav = ({isCollapse=true,setIsCollapse}) => {
                             <div 
                             key={route.id}
                             onClick={() => navigate(route.path,{ state: { refetch: true } })}
-                            className="w-full h-12 flex flex-row items-center gap-4 pl-6 duration-10 hover:border hover:cursor-pointer hover:rounded-lg hover:border-white">
+                            className="w-full h-12 flex flex-row items-center gap-4 pl-6 duration-10 hover:cursor-pointer hover:rounded-lg">
                                 <div className="text-white">{route.icon}</div>
                                 <p className="text-white">{route.label}</p>
                             </div>

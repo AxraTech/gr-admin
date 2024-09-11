@@ -74,7 +74,7 @@ const Register = () => {
       className="w-screen min-h-screen flex justify-center items-center"
     >
       <Toaster />
-      <div className="relative lg:w-[35vw] lg:min-h-[55vh] md:w-[80vw] md:min-h-[45vh] border-2 rounded border-gray-700 flex flex-col justify-around ">
+      <div className="relative lg:w-[45vw] lg:min-h-[55vh] md:w-[80vw] md:min-h-[45vh] border-2 rounded border-gray-700 flex flex-col justify-around ">
         <div className="absolute inset-0 lg:bg-opacity-5 md:bg-opacity-10 justify-around md:backdrop-blur-[12px] lg:backdrop-blur-md"></div>
         <div className="z-10">
           <div className="w-full h-8 mt-4 flex items-center justify-center">

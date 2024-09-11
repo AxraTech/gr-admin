@@ -199,3 +199,35 @@ export const GET_CARDS_TRANSACTION_TODAY_BY_TYPE = gql`
     }
   }
 `;
+
+export const GET_CARDS_TRANSACTION_TODAY_BY_CARD_NUMBER = gql`
+  query getCardTransactionTodayByCardNumber($cardNumber: String!) {
+    card_transactions(
+      where: {
+        created_at: { _gte: "${today}" }
+        card: { card_number: { _eq: $cardNumber } }
+      }
+      order_by: { created_at: desc }
+    ) {
+      id
+      transaction_number
+      amount
+      terminal_id
+      card_id
+      card_transaction_type
+      created_at
+      updated_at
+      card {
+        id
+        card_number
+        customer {
+          id
+          name
+        }
+      }
+      terminal {
+        terminal_number
+      }
+    }
+  }
+`;

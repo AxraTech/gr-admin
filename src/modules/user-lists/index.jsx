@@ -82,7 +82,7 @@ const UserList = () => {
         </div> */}
         <div className="flex flex-row items-center gap-8">
           <div className="">
-            <CustomFilter setOptions={setFilter} option={customerFilterOptions} />
+            <CustomFilter setOptions={setFilter} option={customerFilterOptions} filter={filter}/>
           </div>
           <div className="h-12">
             <button

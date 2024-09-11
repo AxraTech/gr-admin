@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 import { FaSortDown } from "react-icons/fa";
 
-const CustomFilter = ({ setOptions, option, selectLabel="Select Status" }) => {
-  const [filter, setFilter] = useState("");
+const CustomFilter = ({ setOptions, option, selectLabel="Select Status",filter }) => {
+  //const [filter, setFilter] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
   const handleFilter = (value) => {
     setOptions(value);
-    setFilter(value);
+   // setFilter(value);
     setIsOpen(false);
   };
   const toggleDropdown = () => {
@@ -27,6 +27,8 @@ const CustomFilter = ({ setOptions, option, selectLabel="Select Status" }) => {
         label: "Complete"
     },
   ]
+
+  console.log(filter)
 
     return(
         <div

@@ -83,7 +83,7 @@ const CardList = () => {
         </div> */}
         <div className="flex flex-row items-center gap-8">
           <div className="">
-            <CustomFilter setOptions={setFilter} option={cardFilterOptions} />
+            <CustomFilter setOptions={setFilter} option={cardFilterOptions} filter={filter}/>
           </div>
           <div className="h-12">
             <button

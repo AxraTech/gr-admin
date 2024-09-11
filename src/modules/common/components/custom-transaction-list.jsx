@@ -3,6 +3,7 @@ import {
   GET_CARDS_TRANSACTION_BY_CARD_NUMBER,
   GET_CARDS_TRANSACTION_SEVENDAYS,
   GET_CARDS_TRANSACTION_TODAY,
+  GET_CARDS_TRANSACTION_TODAY_BY_CARD_NUMBER,
   GET_CARDS_TRANSACTION_TODAY_BY_TYPE,
 } from "../../../graphql/query/card-transaction-query";
 import clsx from "clsx";
@@ -28,7 +29,7 @@ const CustomTransctionList = () => {
   const [getTransactionByCardNumber, {
     data: transactionByCardNumber,
     loading: fetchTransactionByCardNumber,
-  }] = useLazyQuery(GET_CARDS_TRANSACTION_BY_CARD_NUMBER);
+  }] = useLazyQuery(GET_CARDS_TRANSACTION_TODAY_BY_CARD_NUMBER);
 
   const fetchTransactionLists = () => {
     if (filter === "all" || filter === "") {
@@ -61,6 +62,7 @@ const CustomTransctionList = () => {
       transaction_number: transaction.transaction_number,
       amount: transaction.amount,
       terminal_number: transaction.terminal.terminal_number,
+      name: transaction.card.customer.name,
       card_number: transaction.card.card_number,
       card_transaction_type: transaction.card_transaction_type,
       created_at: transaction.created_at,
@@ -99,9 +101,10 @@ const CustomTransctionList = () => {
 
   const handleSearch = () => {
     if (cardNumberSearch.trim()) {
+      setFilter("");
      // nProgress.start();
       getTransactionByCardNumber({
-        variables: { card_number: cardNumberSearch }
+        variables: { cardNumber: cardNumberSearch }
       })
         .then((response) => {
           setTransactionLists(response.data.card_transactions || []);
@@ -150,6 +153,7 @@ const CustomTransctionList = () => {
           <CustomFilter
             setOptions={setFilter}
             option={transactionFilterOptions}
+            filter={filter}
           />
           <div className="h-12">
             <button

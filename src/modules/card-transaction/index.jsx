@@ -67,6 +67,7 @@ const CardTransactionList = () => {
       transaction_number: transaction.transaction_number,
       amount: transaction.amount,
       terminal_number: transaction.terminal.terminal_number,
+      name:transaction.card.customer.name,
       card_number: transaction.card.card_number,
       card_transaction_type: transaction.card_transaction_type,
       created_at: transaction.created_at,
@@ -98,6 +99,7 @@ const CardTransactionList = () => {
 
   const handleSearch = () => {
     if (cardNumberSearch.trim()) {
+      setFilter("");
       nProgress.start();
       getTransactionByCardNumber({
         variables: { card_number: cardNumberSearch }
@@ -134,7 +136,6 @@ const CardTransactionList = () => {
         nProgress.done();
     };
   }, [fetchCardTransactionList, fetchCardTransactionError]);
-  console.log(tableData)
 
   return (
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
@@ -152,7 +153,7 @@ const CardTransactionList = () => {
         </div>
         <div className="flex flex-row items-center gap-8">
           <div className="">
-            <CustomFilter setOptions={setFilter} option={transactionFilterOptions} selectLabel="Select Type" />
+            <CustomFilter setOptions={setFilter} option={transactionFilterOptions} selectLabel="Select Type" filter={filter} />
           </div>
           <div className="h-12">
             <button

@@ -78,7 +78,7 @@ const TerminalList = () => {
         </div> */}
         <div className="flex flex-row items-center gap-8">
           <div className="">
-            <CustomFilter setOptions={setFilter} option={terminalFilterOptions} />
+            <CustomFilter setOptions={setFilter} option={terminalFilterOptions} filter={filter} />
           </div>
           <div className="h-12">
             <button

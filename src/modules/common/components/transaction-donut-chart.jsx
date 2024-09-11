@@ -21,12 +21,12 @@ const TrasnactionDoughnutChart = () => {
         {cashIn:0,purchase:0}
     )
   const data = {
-    labels: ['Cash In','Purchase'],
+    labels: ['Cash In','Cash Out'],
     datasets:[
         {
             label: "Transaction Amount",
             data: [summary.cashIn,summary.purchase],
-            backgroundColor: ['rgba(200, 186, 10  )', 'rgba(249, 4, 4)'],
+            backgroundColor: ['rgba(118, 16, 199 )', 'rgba(249, 4, 4)'],
             borderColor: ['rgba(75, 192, 192, 1)', 'rgba(81, 141, 232)'],
             borderWidth: 1,
         },

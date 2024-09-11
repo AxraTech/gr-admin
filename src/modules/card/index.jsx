@@ -19,6 +19,8 @@ const CardList = () => {
     error: fetchCardError,
     refetch: cardRefetch
   }] = useLazyQuery(GET_CARDS);
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -34,7 +36,7 @@ const CardList = () => {
   const cardLists = cardList ? cardList.cards : [];
   console.log(cardLists)
 
-  const column = cardColumn(navigate);
+  const column = cardColumn(navigate,pagination,itemsPerPage);
   
   useEffect(() => {
     if(filter === '' || filter === 'all'){
@@ -93,7 +95,7 @@ const CardList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination}/>
     </div>
   );
 };

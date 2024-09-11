@@ -14,6 +14,8 @@ const CashinList = () => {
     error: fetchCashinError,
     refetch: cashinRefetch
   } = useQuery(GET_CASHIN_AMOUNT);
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -21,7 +23,7 @@ const CashinList = () => {
     }
   }, [location.state, cashinRefetch]);
 
-  const column = cashinColumn(navigate);
+  const column = cashinColumn(navigate,pagination,itemsPerPage);
 
   const tableData = cashinList? cashinList.cashin_amounts: []
   console.log(tableData)
@@ -66,7 +68,7 @@ const CashinList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination}/>
     </div>
   );
 };

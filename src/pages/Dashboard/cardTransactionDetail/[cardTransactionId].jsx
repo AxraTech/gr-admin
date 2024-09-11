@@ -45,6 +45,10 @@ const CardTransactionDetail = () => {
     updated_at: "",
     card: {
       card_number: "",
+      customer: {
+        id: "",
+        name: ""
+      }
     },
     cardTransactionTypeByCardTransactionType: {
       name: "",
@@ -89,12 +93,15 @@ const CardTransactionDetail = () => {
     // }
   };
 
+  const date = new Date(cardTransactionData.created_at);
+  const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
   if (fetchCardTransactionbyId) return <div></div>;
 
   return (
     <div className="w-full flex flex-col gap-4 pr-5 pl-5">
       <Toaster />
-      <div className="lg:w-1/2 md:w-full lg:max-h-[80vh] lg:h-[80vh] md:max-h-[80vh] md:h-[45vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
+      <div className="lg:w-3/4 md:w-full lg:max-h-[80vh] lg:h-[80vh] md:max-h-[80vh] md:h-[55vh] flex flex-col justify-end border border-purple-900 rounded p-8 mt-6">
         <div className="w-full h-full overflow-auto rounded grid grid-cols-1">
           <div className="w-full h-full p-6 border bg-gray-100 rounded">
             <div className="w-full h-full flex flex-col gap-4">
@@ -203,6 +210,50 @@ const CardTransactionDetail = () => {
                       name="card_number"
                       value={cardTransactionData.card.card_number || ""}
                       placeholder={cardTransactionData.card.card_number || ""}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="w-full h-auto grid grid-cols-2">
+                    <div>
+                      <p className="text-left mt-2 ml-3 font-semibold">
+                        Card Holder:
+                      </p>
+                    </div>
+                    <input
+                      className={clsx(
+                        "w-full border text-black focus:outline-none rounded p-2",
+                        {
+                          "border-purple-800": isEdit,
+                          "border-transparent": !isEdit,
+                        }
+                      )}
+                      type="text"
+                      disabled={!isEdit}
+                      name="card_number"
+                      value={cardTransactionData.card.customer.name || ""}
+                      placeholder={cardTransactionData.card.customer.name || ""}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="w-full h-auto grid grid-cols-2">
+                    <div>
+                      <p className="text-left mt-2 ml-3 font-semibold">
+                        Created Time:
+                      </p>
+                    </div>
+                    <input
+                      className={clsx(
+                        "w-full border text-black focus:outline-none rounded p-2",
+                        {
+                          "border-purple-800": isEdit,
+                          "border-transparent": !isEdit,
+                        }
+                      )}
+                      type="text"
+                      disabled={!isEdit}
+                      name="card_number"
+                      value={formattedDate || ""}
+                      placeholder={formattedDate || ""}
                       onChange={handleInputChange}
                     />
                   </div>

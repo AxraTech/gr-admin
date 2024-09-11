@@ -14,6 +14,8 @@ const FacilityServiceList = () => {
     error: fetchFacilityServiceError,
     refetch: customerRefetch
   } = useQuery(GET_FACILITY_SERIVCES);
+  const [pagination, setPagination] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -21,7 +23,7 @@ const FacilityServiceList = () => {
     }
   }, [location.state, customerRefetch]);
 
-  const column = facilityServiceColumn(navigate);
+  const column = facilityServiceColumn(navigate,pagination,itemsPerPage);
 
   const tableData = facilityServiceList? facilityServiceList.facility_services: []
   console.log(tableData)
@@ -66,7 +68,7 @@ const FacilityServiceList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} />
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination}/>
     </div>
   );
 };

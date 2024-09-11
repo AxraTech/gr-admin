@@ -14,8 +14,8 @@ function App() {
 
   return (
     <>
-    {/* <div className="w-full h-full md:w-full md:h-full flex items-center justify-center">Not avaliable for mobile devices yet</div> */}
-    <div className="">
+    <div className="w-full h-full lg:hidden md:hidden flex items-center justify-center">Not avaliable for mobile devices yet</div>
+    <div className="hidden lg:block md:block">
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="register" element={<Register />}></Route>

@@ -8,7 +8,7 @@ const MobileNav = ({isCollapse=true,setIsCollapse}) => {
     const navigate = useNavigate();
 
     return(
-        <div className={clsx("w-[100vw] min-h-[30vh] z-50 absolute transition-all duration-700 top-0  bg-gradient-to-b from-blue-900 to-gray-800 border-b rounded-lg p-4 flex flex-col gap-6",{
+        <div className={clsx("md:w-[100vw] md:min-h-[30vh] lg:hidden z-50 absolute transition-all duration-700 top-0  bg-gradient-to-b from-blue-900 to-gray-800 border-b rounded-b-lg p-4 flex flex-col gap-6",{
             "translate-y-[-150%]":isCollapse,
             "translate-y-[0%]":!isCollapse
         })}>
@@ -30,7 +30,7 @@ const MobileNav = ({isCollapse=true,setIsCollapse}) => {
                             <div 
                             key={route.id}
                             onClick={() => navigate(route.path,{ state: { refetch: true } })}
-                            className="w-full h-12 flex flex-row items-center gap-4 pl-6 duration-10 hover:border hover:cursor-pointer hover:rounded-lg hover:border-white">
+                            className="w-full h-12 flex flex-row items-center gap-4 pl-6 duration-10 hover:cursor-pointer hover:rounded-lg">
                                 <div className="text-white">{route.icon}</div>
                                 <p className="text-white">{route.label}</p>
                             </div>

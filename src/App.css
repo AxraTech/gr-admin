@@ -19,6 +19,10 @@ max-width: 1280px; --> */
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+#customer-cardlist{
+  scrollbar-width: none;
+}
+
 /* #progress-bar-container .nprogress .bar {
   
   bottom: 0;

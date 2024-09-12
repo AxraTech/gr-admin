@@ -56,19 +56,19 @@ const Home = () => {
   const TOTAL_COUNT = [
     {
       id: "1",
-      name: "Totoal Customers",
+      name: "Total Customers",
       count: totalCustomers,
       icon: <FaUserGroup size={35} />,
     },
     {
       id: "2",
-      name: "Totoal Cash In",
+      name: "Total Cash In",
       count: totalCashIn.toLocaleString(),
       icon: <BsFillCreditCard2FrontFill size={35} />,
     },
     {
       id: "3",
-      name: "Totoal Cash Out",
+      name: "Total Cash Out",
       count: totalCashOut.toLocaleString(),
       icon: <GrTransaction size={35} />,
     },

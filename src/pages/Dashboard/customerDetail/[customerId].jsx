@@ -36,18 +36,18 @@ const CustomerDetail = () => {
   );
 
   const toggleVisibility = (cardId) => {
-    setIsAmountVisible((prevState) =>({
+    setIsAmountVisible((prevState) => ({
       ...prevState,
-      [cardId]: !prevState[cardId]
-    }))
-  }
+      [cardId]: !prevState[cardId],
+    }));
+  };
 
   const cards =
     getCustomerbyId && getCustomerbyId.customers.length > 0
       ? getCustomerbyId.customers[0].cards
       : [];
 
-      console.log(cards)
+  console.log(cards);
 
   const [customerData, setCustomerData] = useState({
     id: "",
@@ -65,6 +65,12 @@ const CustomerDetail = () => {
       balance: "",
     },
   });
+
+  const date = new Date(customerData.created_at);
+  const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString(
+    [],
+    { hour: "2-digit", minute: "2-digit" }
+  )}`;
 
   useEffect(() => {
     if (getCustomerbyId) {
@@ -116,7 +122,11 @@ const CustomerDetail = () => {
       toast.error("Please Confirm Password");
     } else if (credentials.card_number.length > 6) {
       toast.error("Invalid Card");
-    } else if (credentials.card_password.length > 4 || isNaN(credentials.card_password) || credentials.card_password.length < 4) {
+    } else if (
+      credentials.card_password.length > 4 ||
+      isNaN(credentials.card_password) ||
+      credentials.card_password.length < 4
+    ) {
       toast.error("Password should contain 4 numbers");
     } else {
       try {
@@ -231,6 +241,28 @@ const CustomerDetail = () => {
                       onChange={handleInputChange}
                     />
                   </div>
+                  <div className="w-full h-auto grid grid-cols-2">
+                      <div>
+                        <p className="text-left mt-2 ml-3 font-semibold">
+                          Created Time:
+                        </p>
+                      </div>
+                      <input
+                        className={clsx(
+                          "w-full border-none text-black focus:outline-none rounded p-2",
+                          // {
+                          //   "border-transparent": isEdit,
+                          //   "border-transparent": !isEdit,
+                          // }
+                        )}
+                        type="text"
+                        disabled={true}
+                        name="created_at"
+                        value={formattedDate || ""}
+                        placeholder={formattedDate || ""}
+                        onChange={handleInputChange}
+                      />
+                    </div>
                   {isEdit ? (
                     <div className="w-full grid grid-cols-2">
                       <div className="flex flex-row items-center gap-2">
@@ -308,7 +340,10 @@ const CustomerDetail = () => {
                   {isRegister ? "Cards" : "Add Card"}
                 </button>
               </div>
-              <div id="customer-cardlist" className="w-full h-4/5 overflow-auto">
+              <div
+                id="customer-cardlist"
+                className="w-full h-4/5 overflow-auto"
+              >
                 {isRegister ? (
                   <form
                     className="w-full h-full overflow-y-auto flex flex-col gap-4"
@@ -387,7 +422,10 @@ const CustomerDetail = () => {
                     {cards && cards.length > 0 ? (
                       <div className="w-full h-full  flex flex-col gap-4">
                         {cards.map((card) => (
-                          <div key={card.id} className="grid grid-cols-2 w-full min-h-20 p-2 border border-purple-800 rounded">
+                          <div
+                            key={card.id}
+                            className="grid grid-cols-2 w-full min-h-20 p-2 border border-purple-800 rounded"
+                          >
                             <div>
                               <p className="text-left font-semibold mt-1">
                                 Card No - {card.card_number}
@@ -395,8 +433,9 @@ const CustomerDetail = () => {
                             </div>
                             <div className="w-full h-full grid grid-cols-1">
                               <div className="w-full h-full flex flex-row justify-between gap-8 items-center">
-                                <button className="ml-4 bg-transparent border-none outline-none focus:outline-none" 
-                                onClick={()=>toggleVisibility(card.id)}
+                                <button
+                                  className="ml-4 bg-transparent border-none outline-none focus:outline-none"
+                                  onClick={() => toggleVisibility(card.id)}
                                 >
                                   {isAmountVisible[card.id] ? (
                                     <FaEyeSlash color="purple" />

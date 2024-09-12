@@ -8,6 +8,10 @@ export const GET_TERMINALS = gql`
       disabled
       created_at
       updated_at
+      facility{
+        id
+        name
+      }
     }
   }
 `;

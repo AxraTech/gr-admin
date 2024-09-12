@@ -162,7 +162,7 @@ const TerminalDetail = () => {
                   </div>
                   <div className="w-full h-auto grid grid-cols-2">
                     <div>
-                      <p className="text-left mt-2 ml-3 font-semibold">Facility:</p>
+                      <p className="text-left mt-2 ml-3 font-semibold">Business Unit:</p>
                     </div>
                     {isEdit ? (
                       <div className="w-full mt-0 mb-16 relative">

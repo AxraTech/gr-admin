@@ -10,6 +10,10 @@ export const GET_CARDS = gql`
       updated_at
       disabled
       balance
+      customer{
+        id
+        name
+      }
     }
   }
 `;

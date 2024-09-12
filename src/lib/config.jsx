@@ -40,13 +40,13 @@ export const SidebarRoutes = [
     },
     {
         id: 'facility',
-        label: 'Facility',
+        label: 'Business Unit',
         path: 'facility',
         icon: <GrServicePlay size={20}/>
     },
     {
         id: 'facilityservice',
-        label: 'Facility Service',
+        label: 'Service Package',
         path: 'facilityservice',
         icon: <GrServicePlay size={20}/>
     },

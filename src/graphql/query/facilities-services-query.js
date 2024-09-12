@@ -9,6 +9,10 @@ export const GET_FACILITY_SERIVCES = gql`
       facility_id
       created_at
       updated_at
+       facility {
+        id
+        name
+      }
     }
   }
 `;

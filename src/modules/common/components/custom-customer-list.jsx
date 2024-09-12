@@ -57,7 +57,7 @@ const CustomCustomerList = () => {
           );
         })
       ) : (
-        <div className="w-full h-full flex items-center justify-center">No Customers created in last seven days</div>
+        <div className="w-full h-full flex items-center justify-center">No Customers created today</div>
       )}
     </>
   );

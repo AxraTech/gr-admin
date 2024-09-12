@@ -80,9 +80,13 @@ const Home = () => {
         {TOTAL_COUNT.map((category) => (
           <div
             key={category.id}
-            className="border-2  border-purple-400 p-1 rounded-md"
+            className="border-2  border-purple-400 p-1 rounded-md h-[16rem]"
           >
-            <div className="w-full h-full rounded bg-purple-600 text-white border border-purple-400 p-2 grid grid-cols-1">
+            <div className={clsx("w-full h-full rounde text-gray-700 border border-purple-400 p-2 grid grid-cols-1",{
+              "bg-yellow-300": category.name ==='Totoal Cash In',
+              "bg-blue-300": category.name ==='Totoal Customers',
+              "bg-red-300": category.name ==='Totoal Cash Out',
+            })}>
               <div className="flex items-center justify-center border-b-2 border-white h-3/5">
               <div className="flex items-center justify-center">
                   <h3 className="font-bold text-xl text-center">

@@ -20,6 +20,14 @@ export const userColumn = (navigate,pagination, itemsPerPage) => [
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="column-head">Email</span>,
   }),
+  columnHelper.accessor("created_at", {
+    cell: (info) => {
+      const date = new Date(info.getValue());
+      const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+      return <span>{formattedDate}</span>;
+    },
+    header: () => <span className="">Member Since</span>,
+  }),
   columnHelper.accessor("id", {
     cell: (info) => (
       <button
@@ -45,6 +53,10 @@ export const cardColumn = (navigate,pagination, itemsPerPage) => [
   columnHelper.accessor("card_number", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Card Number</span>,
+  }),
+  columnHelper.accessor("customer", {
+    cell: (info) => <span>{info.getValue().name}</span>,
+    header: () => <span className="">Customer</span>,
   }),
   columnHelper.accessor("disabled", {
     cell: (info) => (
@@ -121,6 +133,10 @@ export const facilityServiceColumn = (navigate,pagination, itemsPerPage) => [
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Service</span>,
   }),
+  columnHelper.accessor("facility", {
+    cell: (info) => <span>{info.getValue().name}</span>,
+    header: () => <span className="">Business Unit</span>,
+  }),
   columnHelper.accessor("price", {
     cell: (info) => <span>{info.getValue().toLocaleString()}</span>,
     header: () => <span className="column-head">Price</span>,
@@ -150,6 +166,10 @@ export const terminalColumn = (navigate,pagination, itemsPerPage) => [
   columnHelper.accessor("terminal_number", {
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Terminal Number</span>,
+  }),
+  columnHelper.accessor("facility", {
+    cell: (info) => <span>{info.getValue().name}</span>,
+    header: () => <span className="">Business Unit</span>,
   }),
   columnHelper.accessor("disabled", {
     cell: (info) => (
@@ -214,6 +234,10 @@ export const cardTransactionColumn = (navigate,pagination, itemsPerPage) => [
     cell: (info) => <span>{info.getValue()}</span>,
     header: () => <span className="">Transaction No</span>,
   }),
+  columnHelper.accessor("terminal", {
+    cell: (info) => <span>{info.getValue().terminal_number}</span>,
+    header: () => <span className="">Terminal</span>,
+  }),
   columnHelper.accessor("amount", {
     cell: (info) => <span>{info.getValue().toLocaleString()}</span>,
     header: () => <span className="">Amount</span>,
@@ -237,7 +261,7 @@ export const cardTransactionColumn = (navigate,pagination, itemsPerPage) => [
       const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
       return <span>{formattedDate}</span>;
     },
-    header: () => <span className="">Created Time</span>,
+    header: () => <span className="">Transaction Time</span>,
   }),
   columnHelper.accessor("id", {
     cell: (info) => (

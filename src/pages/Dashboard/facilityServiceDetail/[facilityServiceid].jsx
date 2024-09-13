@@ -10,7 +10,7 @@ import clsx from "clsx";
 import toast, { Toaster } from "react-hot-toast";
 import LoadingButton from "../../../modules/common/icon/loading-icon";
 import { GET_FACILITY_SERVICE_BY_ID } from "../../../graphql/query/facilities-services-query";
-import { UPDATE_FACILITY_SERVICE } from "../../../graphql/mutation/facility-service-mutation";
+import { DELETE_FACILITY_SERVICE, UPDATE_FACILITY_SERVICE } from "../../../graphql/mutation/facility-service-mutation";
 
 const FacilityServiceDetail = () => {
   const { facilityServiceId } = useParams();
@@ -102,6 +102,29 @@ const FacilityServiceDetail = () => {
     }
   };
 
+  const [deleteFacilityServiceById, { loading: deleteFacilityServiceLoading }] = useMutation(
+    DELETE_FACILITY_SERVICE,
+    {
+      variables: { id: facilityServiceId },
+      onCompleted: () => {
+        toast.success("Deleted successfully");
+        navigate("/dashboard/facilityservice",{ state: { refetch: true } });
+      },
+      onError: (error) => {
+        console.error("Failed to delete service package:", error);
+        toast.error("Failed to delete business unit.");
+      },
+    }
+  );
+
+  const handleDelete = async () => {
+    try {
+      await deleteFacilityServiceById();
+    } catch (error) {
+      console.error("Failed to delete business unit:", error);
+    }
+  };
+
   if (fetchFacilityServicebyId) return <div></div>;
 
   return (
@@ -113,7 +136,7 @@ const FacilityServiceDetail = () => {
             <div className="w-full h-full flex flex-col gap-4">
               <div className="w-full h-[4rem] flex flex-row items-center p-4 justify-between rounded-t rounded-tr bg-gradient-to-r from-blue-900 to-gray-600">
                 <button
-                  onClick={() => navigate("/dashboard/facilityService")}
+                  onClick={() => navigate("/dashboard/facilityService",{ state: { refetch: true } })}
                   className="bg-transparent"
                 >
                   <FaArrowLeft size={20} color="white" />
@@ -211,6 +234,23 @@ const FacilityServiceDetail = () => {
                           <LoadingButton size={20} />
                         ) : (
                           "Save Changes"
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                     {isEdit ? (
+                    <div className="w-full h-12">
+                      <button
+                        type="button"
+                        onClick={handleDelete}
+                        className="w-full h-full flex flex-row items-center justify-center text-white bg-gradient-to-r from-blue-900 to-gray-600"
+                      >
+                        {deleteFacilityServiceLoading ? (
+                          <LoadingButton size={20} />
+                        ) : (
+                          "Delete"
                         )}
                       </button>
                     </div>

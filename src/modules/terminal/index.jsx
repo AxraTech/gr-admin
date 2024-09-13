@@ -90,7 +90,7 @@ const TerminalList = () => {
           </div>
         </div>
       </div>
-      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination}/>
+      <CustomTable column={column} tableData={tableData} setPaginationProps={setPagination} itemInPage={10}/>
     </div>
   );
 };

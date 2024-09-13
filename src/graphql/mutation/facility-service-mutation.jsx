@@ -39,3 +39,14 @@ export const UPDATE_FACILITY_SERVICE = gql`
     }
   }
 `;
+
+export const DELETE_FACILITY_SERVICE = gql`
+  mutation deleteFacilityService($id: uuid!) {
+    delete_facility_services_by_pk(id: $id) {
+      id
+      name
+      price
+      facility_id
+    }
+  }
+`;

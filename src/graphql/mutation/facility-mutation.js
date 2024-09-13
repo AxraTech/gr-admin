@@ -53,3 +53,17 @@ export const UPDATE_FACILITY_BY_ID = gql`
     }
   }
 `;
+
+export const DELETE_FACILITY_BY_ID = gql`
+  mutation deleteFacilityById($id: uuid!) {
+    delete_facilities(where: { id: { _eq: $id } }) {
+      returning {
+        id
+        name
+        phone
+        email
+        establishment_id
+      }
+    }
+  }
+`;

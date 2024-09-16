@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { useMemo, useState } from "react";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
-const CustomTable = ({ column, tableData, isRowColor=false, navigate, setPaginationProps, itemInPage = 5 }) => {
+const CustomTable = ({ column, tableData, isRowColor=false, navigate, setPaginationProps, itemInPage = 10 }) => {
   const [pagination, setPagination] = useState(1);
   const [inputValue, setInputValue] = useState(1);
   const itemsPerPage = itemInPage;

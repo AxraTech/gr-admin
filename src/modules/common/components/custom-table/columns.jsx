@@ -235,7 +235,7 @@ export const cardTransactionColumn = (navigate,pagination, itemsPerPage) => [
     header: () => <span className="">Transaction No</span>,
   }),
   columnHelper.accessor("terminal", {
-    cell: (info) => <span>{info.getValue().terminal_number}</span>,
+    cell: (info) => <span>{info.getValue().terminal_name}</span>,
     header: () => <span className="">Terminal</span>,
   }),
   columnHelper.accessor("amount", {

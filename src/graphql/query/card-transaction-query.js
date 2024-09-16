@@ -105,6 +105,9 @@ export const GET_CARDS_TRANSACTION_BY_TYPE = gql`
           name
         }
       }
+        terminal{
+        terminal_number
+      }
     }
   }
 `;

@@ -21,7 +21,7 @@ jobs:
             cd grhotel/nginx/static-dashboard/gr-admin
             git pull https://${{ secrets.SERVER_GIT_USERNAME }}:${{ secrets.SERVER_TOKEN }}@github.com/AxraTech/gr-admin.git
             cd ../../../
-            docker-compose nginx
+            docker-compose build
             docker-compose down
             docker-compose up -d
             docker system prune -af

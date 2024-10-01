@@ -21,7 +21,6 @@ const UserList = () => {
   const [pagination, setPagination] = useState(1);
   const itemsPerPage = 5;
 
-  console.log(pagination)
 
   useEffect(() => {
     if (location.state?.refetch) {
@@ -29,11 +28,9 @@ const UserList = () => {
     }
   }, [location.state, customerRefetch]);
 
-  console.log(filter)
 
   const [getCustomersByStatus,{data:customerListByStatus,loading:fetchCustomerListByStatus}] = useLazyQuery(GET_CUSTOMERS_BY_STATUS)
   const customerLists = customerList ? customerList.customers : [];
-  console.log(customerLists)
 
   const column = userColumn(navigate,pagination,itemsPerPage);
   

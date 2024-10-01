@@ -47,7 +47,6 @@ const CustomerDetail = () => {
       ? getCustomerbyId.customers[0].cards
       : [];
 
-  console.log(cards);
 
   const [customerData, setCustomerData] = useState({
     id: "",
@@ -99,7 +98,6 @@ const CustomerDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(customerData);
     try {
       await updateCustomerById({
         variables: {

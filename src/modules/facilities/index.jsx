@@ -26,7 +26,6 @@ const FacilityList = () => {
   const column = facilityColumn(navigate,pagination,itemsPerPage);
 
   const tableData = facilityList? facilityList.facilities: []
-  console.log(tableData)
 
   useEffect(() => {
     if (fetchFacilityList) {

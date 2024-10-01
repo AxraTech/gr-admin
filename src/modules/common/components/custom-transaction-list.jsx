@@ -123,7 +123,6 @@ const CustomTransctionList = () => {
     }
   };
 
-  console.log(transactionLists);
 
   const { data: weeklyTransaction, loading: weeklyTransactionLoading } =
     useQuery(GET_CARDS_TRANSACTION_SEVENDAYS);

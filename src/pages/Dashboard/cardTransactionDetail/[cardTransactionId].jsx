@@ -11,7 +11,6 @@ import { UPDATE_CASHIN_AMOUNT_BY_ID } from "../../../graphql/mutation/cashin-mut
 
 const CardTransactionDetail = () => {
   const { cardTransactionId } = useParams();
-  console.log(cardTransactionId);
   const navigate = useNavigate();
   const [isEdit, setisEdit] = useState(false);
   const { data: getCardTransactionbyId, loading: fetchCardTransactionbyId } =
@@ -77,7 +76,6 @@ const CardTransactionDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(cardTransactionData);
     // try {
     //   await updateCardTransactionById({
     //     variables: {

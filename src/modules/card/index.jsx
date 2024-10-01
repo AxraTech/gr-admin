@@ -30,11 +30,9 @@ const CardList = () => {
     }
   }, [location.state, cardRefetch]);
 
-  console.log(filter)
 
   const [getCardsByStatus,{data:cardListByStatus,loading:fetchCardListByStatus}] = useLazyQuery(GET_CARDS_BY_STATUS)
   const cardLists = cardList ? cardList.cards : [];
-  console.log(cardLists)
 
   const column = cardColumn(navigate,pagination,itemsPerPage);
   

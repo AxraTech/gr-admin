@@ -26,7 +26,6 @@ const CashinList = () => {
   const column = cashinColumn(navigate,pagination,itemsPerPage);
 
   const tableData = cashinList? cashinList.cashin_amounts: []
-  console.log(tableData)
 
   useEffect(() => {
     if (fetchCashinList) {

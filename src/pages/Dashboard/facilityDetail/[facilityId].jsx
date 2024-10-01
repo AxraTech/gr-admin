@@ -55,7 +55,6 @@ const FacilityDetail = () => {
   }, [getFacilitybyId]);
 
   useEffect(() => {
-    console.log(establishment);
     if (establishment) {
       setFacilityData((prevData) => ({
         ...prevData,
@@ -85,7 +84,6 @@ const FacilityDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    //console.log(facilityData.facility_id)
     try {
       await updateFacilityById({
         variables: {

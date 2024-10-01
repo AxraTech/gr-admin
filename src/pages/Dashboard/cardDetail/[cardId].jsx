@@ -34,8 +34,6 @@ const CardDetail = () => {
     }
   });
 
-  console.log(cardData.customer)
-
   useEffect(() => {
     if (fetchCardbyId) {
       nProgress.start();

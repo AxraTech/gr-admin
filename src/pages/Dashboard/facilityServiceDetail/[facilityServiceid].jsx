@@ -55,15 +55,10 @@ const FacilityServiceDetail = () => {
   useEffect(() => {
     if (getFacilityServicebyId) {
       setFacilityServiceData(getFacilityServicebyId.facility_services[0]);
-      console.log(getFacilityServicebyId.facility_services[0])
     }
   }, [getFacilityServicebyId]);
 
- console.log(facilityServiceId)
-  console.log(facilityServiceData)
-
   useEffect(() => {
-    console.log(facility);
     if (facility) {
       setFacilityServiceData((prevData) => ({
         ...prevData,

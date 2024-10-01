@@ -29,7 +29,6 @@ const TerminalList = () => {
 
   const [getTerminalsByStatus,{data:terminalListByStatus,loading:fetchTerminalListByStatus}] = useLazyQuery(GET_TERMINAL_BY_STATUS)
   const terminalLists = terminalList ? terminalList.terminals : [];
-  console.log(terminalLists)
 
   const column = terminalColumn(navigate,pagination,itemsPerPage);
   

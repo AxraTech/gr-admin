@@ -28,7 +28,6 @@ const CustomFilter = ({ setOptions, option, selectLabel="Select Status",filter }
     },
   ]
 
-  console.log(filter)
 
     return(
         <div

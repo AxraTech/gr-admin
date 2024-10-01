@@ -61,7 +61,6 @@ const TerminalDetail = () => {
   }, [getTerminalbyId]);
 
   useEffect(() => {
-    console.log(facility);
     if (facility) {
       setTerminalData((prevData) => ({
         ...prevData,
@@ -91,7 +90,6 @@ const TerminalDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    //console.log(terminalData.facility_id)
     try {
       await updateTerminalById({
         variables: {

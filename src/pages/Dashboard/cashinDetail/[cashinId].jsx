@@ -13,7 +13,6 @@ import { GET_CASHIN_AMOUNT_BY_ID } from "../../../graphql/query/cash-in-query";
 
 const CashinDetail = () => {
   const { cashinId } = useParams();
-  console.log(cashinId);
   const navigate = useNavigate();
   const [isEdit, setisEdit] = useState(false);
   const { data: getCashinbyId, loading: fetchCashinbyId } = useQuery(
@@ -73,7 +72,6 @@ const CashinDetail = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    console.log(cashinData);
     try {
       await updateCashinById({
         variables: {

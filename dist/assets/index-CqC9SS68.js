@@ -620,6 +620,10 @@ to {
       updated_at
       disabled
       balance
+      customer{
+        id
+        name
+      }
     }
   }
 `,tj=()=>{const[e,t]=R.useState("all"),n=Ne(),r=_n(),[i,{data:s,loading:o,error:a,refetch:l}]=an(Kw),[c,u]=R.useState(1),f=5;R.useEffect(()=>{var y;(y=r.state)!=null&&y.refetch&&l().then(()=>{n("/dashboard/card",{state:{}})})},[r.state,l]),console.log(e);const[h,{data:p,loading:g}]=an(ej),v=s?s.cards:[];console.log(v);const b=Pk(n,c,f);R.useEffect(()=>{e===""||e==="all"?i():h(e==="enable"?{variables:{disabled:!1}}:{variables:{disabled:!0}})},[e,i,h]);const m=e===""||e==="all"?s?s.cards:[]:p?p.cards:[];return R.useEffect(()=>(o?(ae.configure({parent:"#progress-bar-container",showSpinner:!1}),ae.start()):ae.done(),()=>{ae.done()}),[o,a]),d.jsxs("div",{className:"w-full flex flex-col gap-4 pr-5 pl-5",children:[d.jsx("div",{className:"w-full h-20 flex flex-row items-center justify-between",children:d.jsxs("div",{className:"flex flex-row items-center gap-8",children:[d.jsx("div",{className:"",children:d.jsx(ya,{setOptions:t,option:AE,filter:e})}),d.jsx("div",{className:"h-12",children:d.jsx("button",{className:"bg-green-600 hover:border-green-500 text-white duration-500 hover:bg-green-400 hover:text-gray-800",onClick:()=>n("cardlists/createcard"),children:"New"})})]})}),d.jsx(Ti,{column:b,tableData:m,setPaginationProps:u})]})};function nj(e){throw new Error('Could not dynamically require "'+e+'". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.')}var Xw={exports:{}};const rj={},ij=Object.freeze(Object.defineProperty({__proto__:null,default:rj},Symbol.toStringTag,{value:"Module"})),sj=Q_(ij);(function(e){/**
@@ -761,6 +765,10 @@ to {
       disabled
       created_at
       updated_at
+      facility{
+        id
+        name
+      }
     }
   }
 `,vj=()=>{const[e,t]=R.useState("all"),n=Ne(),[r,i]=R.useState(1),s=5,[o,{data:a,loading:l,error:c,refetch:u}]=an(pj);R.useEffect(()=>{var m;(m=location.state)!=null&&m.refetch&&u()},[location.state,u]);const[f,{data:h,loading:p}]=an(mj),g=a?a.terminals:[];console.log(g);const v=Ik(n,r,s);R.useEffect(()=>{e===""||e==="all"?o():f(e==="enable"?{variables:{disabled:!1}}:{variables:{disabled:!0}})},[e,o,f]);const b=e===""||e==="all"?a?a.terminals:[]:h?h.terminals:[];return R.useEffect(()=>(l?(ae.configure({parent:"#progress-bar-container",showSpinner:!1}),ae.start()):ae.done(),()=>{ae.done()}),[l,c]),d.jsxs("div",{className:"w-full flex flex-col gap-4 pr-5 pl-5",children:[d.jsx("div",{className:"w-full h-20 flex flex-row items-center justify-between",children:d.jsxs("div",{className:"flex flex-row items-center gap-8",children:[d.jsx("div",{className:"",children:d.jsx(ya,{setOptions:t,option:LE,filter:e})}),d.jsx("div",{className:"h-12",children:d.jsx("button",{className:"bg-green-600 hover:border-green-500 text-white duration-500 hover:bg-green-400 hover:text-gray-800",onClick:()=>n("terminallists/createterminal"),children:"New"})})]})}),d.jsx(Ti,{column:v,tableData:b,setPaginationProps:i,itemInPage:10})]})},yj=ne`

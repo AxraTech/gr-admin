@@ -41,6 +41,10 @@ export const GET_TERMINAL_BY_STATUS = gql`
       disabled
       created_at
       updated_at
+      facility{
+        id
+        name
+      }
     }
   }
 `;

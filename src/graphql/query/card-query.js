@@ -46,6 +46,10 @@ export const GET_CARDS_BY_STATUS = gql`
       updated_at
       disabled
       balance
+      customer{
+        id
+        name
+      }
     }
   }
 `;
